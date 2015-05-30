@@ -1,1 +1,0 @@
-Laws = new Meteor.Collection("laws"); 
