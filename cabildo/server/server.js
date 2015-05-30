@@ -8,7 +8,7 @@ Meteor.methods({
 		var law = {
 			text:options.text,
 			owner:Meteor.userId(),
-			date: new Date()
+			date: new Date() 
 		}
 		Laws.insert(law);
 	}
