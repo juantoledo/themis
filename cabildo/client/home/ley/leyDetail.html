@@ -6,16 +6,20 @@
 
 		<div class="media-body">
 
-			<h6>Ley creada por {{owner}} </h6>
-			<p>{{text}}</p>
-			
-			<div class="media">
-									
-				<h4 class="media-heading"> 
-					<a class="likebtn muted"><small>Like</small></a>
-				</h4>
-				
-			</div>
+			{{#if isModeEditLaw}}
+				<div class="law">
+					<textarea rows="4" cols="100" name="editLawText" id="editLawText" value="{{text}}" style="width: auto; height: auto;" class="input-xxlarg editLawText" ></textarea>
+					<button class="editLawSubmit">Editar Ley</button>
+				</div>
+			{{else}}
+				<h6>Ley creada por {{owner}} </h6>
+				<p>{{text}}</p>
+				<div id="edit-law-enable" class="law btn btn-inverse">
+					Editar
+				</div>
+				{{>vote}}
+			{{/if}}		
 		</div>
+		
 	</div>
 </template>

@@ -1,18 +1,26 @@
-Meteor.publish("laws", function(userid){
-	return Laws.find();
-})
+if(Meteor.isServer){
 
-Meteor.methods({
-	
-	'addLaw':function(options){
-		var law = {
-			text:options.text,
-			owner:Meteor.userId(),
-			date: new Date() 
-		}
-		Laws.insert(law);
-	}
+	Meteor.publish("laws", function(userid){
+		return Laws.find();
+	})
+
+	Meteor.methods({
 		
-	
-})
+		'addLaw':function(options){
+			var law = {
+				text:options.text,
+				owner:Meteor.userId(),
+				date: new Date() 
+			}
+			Laws.insert(law);
+		},
+		'editLaw':function(options){
+			
+			Laws.update(options.lawId, { $set: { text: options.text} });
+			
+		}
+			
+		
+	})
 
+}

@@ -1,0 +1,10 @@
+<template name="perfil">
+	<div class="well well-large">
+		<label>Mis Leyes</label>
+		<ul id="userLaws" class="unstyled">
+			{{#each userLaws}}
+				{{>ley}}
+			{{/each}}
+		</ul>
+	</div>
+</template>
