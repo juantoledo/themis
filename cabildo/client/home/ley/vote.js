@@ -42,6 +42,15 @@ Template.vote.helpers({
 		return "";
 	},
 
+	totalFingerUp: function () {
+		var lawId = this._id;
+		
+		var lawWithApprovedVotes = Laws.find({_id:lawId, "votes.type":1}).fetch();
+
+		return countVotes(lawWithApprovedVotes[0], 1);
+
+	},
+
 	fingerDownText: function () {
 		var lawId = this._id;
 		
@@ -51,6 +60,27 @@ Template.vote.helpers({
 			return "--1";
 		}
 		return "";
+	},
+
+	totalFingerDown: function () {
+		var lawId = this._id;
+		
+		var lawWithDeclineVotes = Laws.find({_id:lawId, "votes.type":2}).fetch();
+
+		return countVotes(lawWithDeclineVotes[0], 2);
 	}
 
 });
+
+function countVotes(law, type){
+		var count = 0;
+		if(law != undefined && law.votes != undefined){
+			for(var i = 0; i < law.votes.length; i++) {
+			  if(law.votes[i].type == type){
+			  	count = count + 1;
+			  }
+
+			}
+		}
+		return count;
+	}
