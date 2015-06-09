@@ -1,6 +1,4 @@
-Meteor.publish("laws", function(userid){
-	return Laws.find();
-})
+
 
 Meteor.methods({
 	

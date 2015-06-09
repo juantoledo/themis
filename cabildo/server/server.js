@@ -4,6 +4,7 @@ if(Meteor.isServer){
 		return Laws.find();
 	})
 
+
 	Meteor.methods({
 		
 		'addLaw':function(options){
