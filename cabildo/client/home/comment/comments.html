@@ -1,0 +1,41 @@
+<template name="comments">
+	commentarios
+
+
+	 <form >
+		<input id="newCommentInput" type="text" placeholder="Type to add comment" />
+	</form>	
+
+	 <button id="submitCommentLaw">Publicar Comentario</button>
+
+	{{#each comments}}
+		{{>comment}}
+	{{/each}}
+
+
+</template>
+
+<template name="comment">
+
+	<div>
+		{{#if modeEditComment}}
+			<span class="text">
+				<strong>{{createdBy}}</strong>
+				- 
+				<input type="text" id="editedComment" value="{{commentText}}" />
+			</span>
+			<button id="publishCommentButton">Publicar Edición</button>
+			
+		{{else}}
+				
+			<span class="text">
+				<strong>{{createdBy}}</strong>
+				- {{commentText}}
+			</span>
+			<button id="editCommentButton">Editar Comentario</button>
+		{{/if}}		
+	
+		
+	</div>
+
+</template>

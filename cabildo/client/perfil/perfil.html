@@ -1,10 +1,16 @@
 <template name="perfil">
-	<div class="well well-large">
-		<label>Mis Leyes</label>
-		<ul id="userLaws" class="unstyled">
-			{{#each userLaws}}
-				{{>ley}}
-			{{/each}}
-		</ul>
-	</div>
+
+	<div class="navbar navbar-static-top">
+		<div class="navbar-inner">
+			<ul class="nav">
+				<li><div id="misLeyes">Mis Leyes </div></li>
+				<li><div id="misDatos">  Mis Datos </div></li>
+				
+			</ul>
+		</div>
+	</div>	
+
+	{{> Template.dynamic
+		template = currentPerfilTemplate}}
+	
 </template>

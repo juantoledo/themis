@@ -13,14 +13,24 @@ Template.home.events({
 
 	'click .leySubmit':function(evt, tmpl){
 		
-			var leyText = tmpl.find('.leyText').value;
-			var options = {text:leyText};
+		var leyText = tmpl.find('.leyText').value;
+		var userName = getUserName(Meteor.user());
+
+		var options = {text:leyText, createdBy:userName};
 			
-			Meteor.call('addLaw', options);
-			$('.leyText').val("").select().focus();
+		Meteor.call('addLaw', options);
+		$('.leyText').val("").select().focus();
 			
 			
 		
 	}
 
 })
+
+
+function getUserName(user){
+	if(user.emails != undefined){
+		return user.emails[0].address;
+	}
+	return 'nombre por defecto';
+}

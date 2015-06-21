@@ -11,6 +11,7 @@ if(Meteor.isServer){
 			var law = {
 				text:options.text,
 				owner:Meteor.userId(),
+				createdBy:options.createdBy,
 				date: new Date() 
 			}
 			Laws.insert(law);
