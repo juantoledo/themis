@@ -1,1 +1,265 @@
-/* CSS declarations go here */
+/*!
+ * Start Bootstrap - Modern Business HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Global Styles */
+
+html,
+body {
+    height: 100%;
+}
+
+.btn-xl {  
+    padding: 15px 22px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 6px
+}
+
+
+body {
+    /*padding-top: 50px;  Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    background: #F4F4F4;
+}
+
+#login-buttons{ display: inline; line-height: 20px; margin-right: 0px;}
+#login-buttons a.login-link-text {padding-top: 15px; padding-bottom: 15px; display: block; font-size: 10px; text-decoration: none;}
+
+.navbar-inverse{background-color: rgba(255,255,255,0.8); border:none;}
+.img-portfolio {margin-bottom: 30px;}
+.img-hover:hover {opacity: 0.8;}
+.createlaw-btn{ background: #3498db; border: 0px; color: #FFF;}
+.createlaw-btn:hover{ background: #2B81BA; color: #fff}
+
+.navbar-inverse .navbar-brand{ color: #353535}
+.navbar-inverse .navbar-nav > li > a{color: #353535;}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus { color: #1C1C1C;}
+.navbar-inverse .navbar-nav > li > a.createlaw-btn{ padding: 5px}
+
+/* Home Page Carousel */
+header {
+    position: relative;
+    width: 100%;
+    min-height: 80%;
+    text-align: center;
+    color: #fff;
+    background-image: url(../bombardeo-de-poemas.jpg);
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+header.home div.layer{ width: 100%; height: 100%; background: rgba(0,0,0,0.3); position: absolute;}
+
+header .header-content {
+    position: relative;
+    width: 100%;
+    padding: 100px 15px;
+    text-align: center;
+}
+
+header .header-content .header-content-inner h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+header .header-content .header-content-inner hr {
+    margin: 30px auto;
+}
+
+header .header-content .header-content-inner p {
+    margin-bottom: 50px;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,.7);
+}
+
+
+header.home .header-content-inner a, header.home .header-content-inner h2, header.home .header-content-inner p{text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.38); color: #fff}
+header.home .header-content-inner h2 {font-family: georgia, "Times New Roman"; font-weight: bold;}
+header.home .header-content-inner p a {text-decoration: underline;}
+header.home .header-content-inner hr { border-top: 10px solid #3498db}
+header.home .header-content-inner a.createlaw-btn{ text-shadow :none}
+
+
+
+
+header.carousel {
+    height: 50%;
+}
+
+header.carousel .item,
+header.carousel .item.active,
+header.carousel .carousel-inner {
+    height: 100%;
+}
+
+header.carousel .fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+/* 404 Page Styles */
+
+    .error-404 {
+    font-size: 100px;
+}
+
+/* Pricing Page Styles */
+
+.price {
+    display: block;
+    font-size: 50px;
+    line-height: 50px;
+}
+
+.price sup {
+    top: -20px;
+    left: 2px;
+    font-size: 20px;
+}
+
+.period {
+    display: block;
+    font-style: italic;
+}
+
+.listas-box h3{ font-size: 15px; color: #E0E0E0; background: #2F2F2F; line-height: 30px; padding-left: 10px;}
+.listas-box ul li{ padding-left: 10px; position:relative; margin-bottom: 15px; line-height: 20px;}
+.listas-box ul {
+    counter-reset:li; list-style: none; /* Initiate a counter */ 
+    margin:0 0 6px 2em; /* Give each list item a left margin to make room for the numbers */
+    padding:4px 8px; /* Add some spacing around the content */
+    list-style:none; /* Disable the normal item numbering */
+}
+
+.listas-box ul > li:before {
+    content:counter(li); /* Use the counter as content */
+    counter-increment:li;
+    position:absolute;
+    top:-2px;
+    left:-2em;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    width:2em;
+    /* Some space between the number and the content in browsers that support
+       generated content but not positioning it (Camino 2 is one example) */
+    margin-right:8px;
+    padding:4px;
+    color:#fff;
+    background:#3498DB;
+    text-align:center;
+    border-radius: 17px;
+}
+
+.law-content { background: #fff; -webkit-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.22); -moz-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.22);box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.22); border-radius: 3px; border: 1px solid #8E8E8E; padding: 15px;}
+.law-content p{ font-size: 15px; color:#535353; font-family: georgia, "Times New Roman"; font-weight: normal; margin-bottom: 15px;}
+.law-share a{ display: inline-block; margin-right: 10px; font-size: 11px; color: #4B98EE}
+.comments h3 { font-size: 23px; font-weight: bold; }
+
+.law-data span{ display: inline-block; margin-right: 20px; font-size: 14px;}
+.law-data span em{ font-weight: bold; font-style: normal;}
+.law-data .author span.author {}
+.law-data .author span.colaborator {}
+.law-data .author span.opinions {}
+
+
+
+
+.user-laws-item{ background: #646464; border-radius: 3px; height: 100px; padding: 8px; margin-bottom: 20px;}
+.user-laws-item h3{ margin: 0px; line-height: 15px; margin-bottom: 20px;}
+.user-laws-item h3 a{font-size: 19px; color: #FFF; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.38); }
+.user-laws-item h3 a:hover{text-decoration: none;text-shadow: none}
+span.cat {display: inline-block; border-radius: 3px; padding: 1px 3px; margin-right: 5px; font-size: 10px; text-transform: uppercase; color: #FFF;}
+
+
+.laws-category-item{ background: #646464; border-radius: 3px; height: 100px; padding: 8px; margin-bottom: 20px;}
+.laws-category-item h3{ margin: 0px; line-height: 15px; margin-bottom: 20px;}
+.laws-category-item h3 a{font-size: 19px; color: #FFF; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.38); }
+.laws-category-item h3 a:hover{text-decoration: none;text-shadow: none}
+
+.laws-category-item h3 { color: #E6E6E6;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.38); font-size: 13px}
+
+
+.cat-ciudadania{ background: #9b59b6}
+.cat-turismo{background:#e67e22}
+.cat-interior{background:#16a085}
+.cat-deporte{background:#d35400}
+
+
+
+
+
+/* Footer Styles */
+
+footer {
+    margin: 50px 0;
+}
+
+/* Responsive Styles */
+
+/*@media(max-width:991px) {
+    .customer-img,
+    .img-related {
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width:767px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+
+    header.carousel .carousel {
+        height: 70%;
+    }
+}*/
+
+@media(min-width:992px) {
+    .customer-img,
+    .img-related {
+        margin-bottom: 30px;
+    }
+}
+
+@media(min-width:768px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+     header {
+        min-height: 80%;
+    }
+    header .header-content {
+        position: absolute;
+        top: 50%;
+        padding: 0 50px;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    header .header-content .header-content-inner {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1000px;
+    }
+
+    header .header-content .header-content-inner p {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 80%;
+        font-size: 18px;
+    }
+        header.carousel .carousel {
+        height: 70%;
+    }
+}
