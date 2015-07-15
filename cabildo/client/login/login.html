@@ -1,0 +1,21 @@
+<template name="login">
+	{{> header}}
+	
+	{{#if hasSuccessMessage}}
+		<div class="alert alert-success" id="valid_form">{{successMessage}}</div>
+	{{/if}}
+	{{#if hasFailMessage}}
+  		<div class="alert" id="invalid_form">{{{failMessage}}}</div>
+  	{{/if}}
+	<div class="hero-unit">
+		<form id="login-form" action="action">
+	    	<div>
+	    		Correo electrónico: <input type="email" id="userMail" />
+	    		<br /> 
+	       		Contraseña: <input type="password" id="userPassword" />
+	       		<br /> 	 
+	       		<input type="submit" id="createUser" value="Entrar" />
+	     	</div>
+	   </form>
+	</div>
+</template>

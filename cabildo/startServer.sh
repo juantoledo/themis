@@ -7,4 +7,9 @@ meteor add jquery
 meteor add iron:router
 meteor add accounts-ui accounts-password 
 
+meteor remove autopublish insecure
+
+meteor add accounts-base
+meteor add alanning:roles
+
 meteor 

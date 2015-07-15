@@ -1,5 +1,3 @@
-if(Meteor.isServer){
-
-	
-
-}
+Meteor.publish("laws", function(){
+	return Laws.find();
+})

@@ -2,27 +2,21 @@
 	{{> header}}
 
 	<div class="container">
-		<h2>Ponle un título a tu ley</h2>
-		<p class="law-data">
-			<span class="author">Autor: <a href="#">Comunista_ABC1</a></span>
-			<span class="colaborator">Colaboradores: <em>12</em></span>
-			
-		</p>
-		<div class="row law-box">
-			<div class="col-md-8">
-				<div class="law-content">
-					
-				</div>
-				<div class="law-share">
-					<p>
-						<a href="#">facebook</a>
-						<a href="#">twitter</a>
-						<a href="#">google +</a>
-						<a href="#">pinterest</a>
-					</p>
-				</div>
-			</div>
+
+		<h3>
+			Título de ley <br />
+			<textarea rows="1" cols="50" name="lawTitle" id="lawTitle" value="" placeholder="Pensando en un titulo de ley" style="width: auto; height: auto;" class="input-xxlarg" ></textarea>
+		</h3>
 		
-		</div>
+		<h3>
+			 Descripción de ley<br />
+	
+			<textarea rows="8" cols="100" name="lawContent" id="lawContent" value="" placeholder="pensando en el contenido de la ley" style="width: auto; height: auto;" class="input-xxlarg leyText" ></textarea>
+		</h3>
+
+		 <button  id="lawCreateSubmit" class="btn btn-primary">Crear ley</button>
+
 	</div>
+	<br />
+	<br />
 </template>

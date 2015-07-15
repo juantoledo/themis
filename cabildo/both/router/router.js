@@ -26,3 +26,11 @@ Router.route('/lawSearch', function () {
   this.render('lawSearch'); 
 });
 
+Router.route('/login', function () {
+  this.render('login'); 
+});
+
+Router.route('/registry', function () {
+  this.render('registry'); 
+});
+

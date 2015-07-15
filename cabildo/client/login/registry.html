@@ -1,0 +1,26 @@
+<template name="registry">
+	{{> header}}
+
+	{{#if hasSuccessMessage}}
+		<div class="alert alert-success" id="valid_form">{{successMessage}}</div>
+	{{/if}}
+	{{#if hasFailMessage}}
+  		<div class="alert" id="invalid_form">{{{failMessage}}}</div>
+  	{{/if}}
+	<div class="hero-unit">
+		<form id="register-form" action="action">
+	    	<div>
+	    		Correo electrónico: <input type="email" id="userMail" />
+	    		<br />
+	    		Nombre usuario: <input type="text" id="userName" />
+	    		<br />	  
+	       		Contraseña: <input type="password" id="userPassword" />
+	       		<br /> 
+	       		Repetir contraseña: <input type="password" id="userPasswordConfirm" />
+	       		<br />
+	       		<input type="submit" id="createUser" value="Crear cuenta" />
+	     	</div>
+	   </form>
+	</div>
+	
+</template>
