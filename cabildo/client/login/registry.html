@@ -18,7 +18,17 @@
 	       		<br /> 
 	       		Repetir contraseña: <input type="password" id="userPasswordConfirm" />
 	       		<br />
+	       		{{> reCAPTCHA}}
+
+	       		 <small><div>Al hacer clic en "Crear cuenta", aceptas las <button id="conditions">condiciones</button> y confirmas que leíste nuestra Política de datos.</div> </small>
 	       		<input type="submit" id="createUser" value="Crear cuenta" />
+	     	</div>
+
+	     	<div id="dialog" title="Condicion de uso Cabildo">Privacidad <br/>Tu privacidad es muy importante para nosotros. Diseñamos nuestra...<br/><br/>
+	     		Compartir contenido y la información <br/>Eres el propietario de todo el contenido y la información que publicas en...<br/><br/>
+	     		Seguridad <br />
+	     		Hacemos todo lo posible para que Cabildo sea un sitio seguro, pero no podemos garantizarlo. Necesitamos tu ayuda para que así sea, lo que implica los siguientes compromisos de tu parte... <br/><br/>
+	     		...
 	     	</div>
 	   </form>
 	</div>

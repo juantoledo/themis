@@ -1,3 +1,21 @@
+Meteor.startup(function() {
+    reCAPTCHA.config({
+        theme: 'light',  // 'light' default or 'dark'
+        publickey: '6LdS7wkTAAAAAHbAkTNe3wm--67rEKp4eAwwDSGM'
+    });
+});
+
+Template.registry.rendered = function() { 
+  
+    Session.set('displaySuccessMessage', null);
+	Session.set('displayFailMessage', null);
+
+  	$( "#dialog" ).dialog({autoOpen: false,
+  						width: 600,
+        				height: 500}); 
+}
+
+
 Template.registry.successMessage = function(){
   return Session.get('displaySuccessMessage');
 }
@@ -20,11 +38,10 @@ Template.registry.hasFailMessage = function(){
 }
 
 Template.registry.events({
-	'submit #register-form' : function(e, tmpl) {
+	'click #register-form' : function(e, tmpl) {
 	    Session.set('displayFailMessage', null);
 	    var hasEmptyFields = false;
 	    var errorMessage = '';
-
 
 	    var userName = tmpl.find('#userName').value;
 	    var userMail = tmpl.find('#userMail').value;
@@ -53,14 +70,26 @@ Template.registry.events({
 	    	return false;
 	    }
 
-	    var options = {userName:userName, userMail:userMail, password:password};
+	    var options = {
+	    	userName:userName, 
+	    	userMail:userMail, 
+	    	password:password,
+	    	g_recaptcha_response : $('#g-recaptcha-response').val()
+	    };
 
-	    Meteor.call('addCouncilorUser', options, function(err){
+	    Meteor.call('addCouncilorUser', options, function(err, result){
+	      	console.log(result);
+
 	      	if (err) {
 	            Session.set('displayFailMessage', '' + err);
 	            Session.set('displaySuccessMessage', null);
 	            
-	      	} else {
+	      	} 
+	      	if(result != undefined && result.success == false){
+	      		Session.set('displayFailMessage', 'Necesitamos que asegures que no eres un robot');
+	            Session.set('displaySuccessMessage', null);
+	      	}
+	      	else {
 	        	Session.set('displayFailMessage', null);
 	        	Session.set('displaySuccessMessage', 'La cuenta ha sido creada');
 	        	tmpl.find('#userName').value = "";
@@ -72,7 +101,16 @@ Template.registry.events({
     	});
 
 	    return false;
+	},
+
+	'click #conditions' : function(e, tmpl) {
+		 var dial = $( '#dialog' );
+		 dial.dialog('open');
+
+		 return false;
 	}
+
 
     
 });
+

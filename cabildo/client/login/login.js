@@ -1,3 +1,10 @@
+Template.login.rendered = function() { 
+  
+    Session.set('displaySuccessMessage', null);
+	Session.set('displayFailMessage', null);
+
+}
+
 Template.login.successMessage = function(){
   return Session.get('displaySuccessMessage');
 }
@@ -41,6 +48,7 @@ Template.login.events({
 	      	if (err) {
 	            Session.set('displayFailMessage', '' + err);
 	            Session.set('displaySuccessMessage', null);
+	            tmpl.find('#userPassword').value = "";
 	            
 	      	} else {
 	        	Session.set('displayFailMessage', null);

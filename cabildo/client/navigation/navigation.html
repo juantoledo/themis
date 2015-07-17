@@ -36,14 +36,22 @@
 					<li>
 						<a href="lawSearch">Buscador de Leyes</a>
 					</li>
-					<li>
-						<a href="login">Ingresar</a>
-					</li>
-					<li>
-						<a href="registry">Registrar</a>
-					</li>
+					
 					<li>
 						<a href="userName" class="btn btn-default">{{userName}}</a>
+					</li>
+					{{#if isLogged}}
+						<li>
+							<div id="sessionClosed">Cerrar Sesión</div>
+						</li>
+					{{else}}
+						<li>
+							<a href="login">Ingresar</a>
+						</li>
+					{{/if}}
+
+					<li>
+						<a href="registry">Registrar</a>
 					</li>
 				</ul>
 			</div>

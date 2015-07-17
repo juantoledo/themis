@@ -7,3 +7,19 @@ Template.navigation.userName = function(){
   	}
 	return 'Usuario: ' + user.profile.name;
 }
+
+Template.navigation.isLogged = function(){
+
+  	var userId = Meteor.userId();
+	if(userId != undefined){
+		return true;
+	}
+  	
+	return false;
+}
+
+Template.navigation.events = {
+	'click #sessionClosed': function(){
+	    Meteor.logout();
+	}
+}
