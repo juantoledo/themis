@@ -3,6 +3,13 @@
 
 	<div class="container">
 
+		{{#if hasSuccessMessage}}
+			<div class="alert alert-success" id="valid_form">{{successMessage}}</div>
+		{{/if}}
+		{{#if hasFailMessage}}
+  			<div class="alert" id="invalid_form">{{{failMessage}}}</div>
+  		{{/if}}
+
 		<h3>
 			Título de ley <br />
 			<textarea rows="1" cols="50" name="lawTitle" id="lawTitle" value="" placeholder="Pensando en un titulo de ley" style="width: auto; height: auto;" class="input-xxlarg" ></textarea>
@@ -14,9 +21,13 @@
 			<textarea rows="8" cols="100" name="lawContent" id="lawContent" value="" placeholder="pensando en el contenido de la ley" style="width: auto; height: auto;" class="input-xxlarg leyText" ></textarea>
 		</h3>
 
-		 <button  id="lawCreateSubmit" class="btn btn-primary">Crear ley</button>
+		{{> category}}
+
+		<button  id="lawCreateSubmit" class="btn btn-primary">Crear ley</button>
 
 	</div>
 	<br />
 	<br />
 </template>
+
+

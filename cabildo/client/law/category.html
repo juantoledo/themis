@@ -1,0 +1,16 @@
+<template name="category">
+
+	<h3>
+		Categorías <br />
+		<div id="autocompleteCategory">
+			{{> inputAutocomplete settings=settings id="lawCategory" class="input-xlarge" placeholder="comienza a escribir la categoria"}}
+		</div>			
+	</h3>
+	<div id="categoriesPlace" class="small"> </div>
+
+
+</template>
+
+<template name="userPill">
+    <span class="label">{{type}}</span>
+</template>

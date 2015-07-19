@@ -13,6 +13,7 @@ meteor add accounts-base
 meteor add alanning:roles
 meteor add appshore:recaptcha
 meteor add mizzao:jquery-ui
+meteor add mizzao:autocomplete
 
 
 meteor 

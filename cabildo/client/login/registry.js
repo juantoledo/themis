@@ -38,7 +38,7 @@ Template.registry.hasFailMessage = function(){
 }
 
 Template.registry.events({
-	'click #register-form' : function(e, tmpl) {
+	'click #createUser' : function(e, tmpl) {
 	    Session.set('displayFailMessage', null);
 	    var hasEmptyFields = false;
 	    var errorMessage = '';
@@ -63,6 +63,7 @@ Template.registry.events({
 	    if(!(password === userPasswordConfirm)){
 	    	Session.set('displayFailMessage', 'Error: Los password deben ser iguales.');
 	    	Session.set('displaySuccessMessage', null);
+	    	//$('#userPassword').val().select().focus();
 	    	return false;
 	    }
 
@@ -83,19 +84,20 @@ Template.registry.events({
 	      	if (err) {
 	            Session.set('displayFailMessage', '' + err);
 	            Session.set('displaySuccessMessage', null);
+	            $('#userName').val('').select().focus();
 	            
 	      	} 
-	      	if(result != undefined && result.success == false){
+	      	else if(result != undefined && result.success == false){
 	      		Session.set('displayFailMessage', 'Necesitamos que asegures que no eres un robot');
 	            Session.set('displaySuccessMessage', null);
 	      	}
 	      	else {
 	        	Session.set('displayFailMessage', null);
 	        	Session.set('displaySuccessMessage', 'La cuenta ha sido creada');
-	        	tmpl.find('#userName').value = "";
-	        	tmpl.find('#userMail').value = "";
-	        	tmpl.find('#userPassword').value = "";
-	        	tmpl.find('#userPasswordConfirm').value = "";
+	        	$('#userName').val('');
+	        	$('#userMail').val('');
+	        	$('#userPassword').val('');
+	        	$('#userPasswordConfirm').val('');	   
 	      	}
 
     	});

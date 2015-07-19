@@ -47,14 +47,14 @@ Template.login.events({
 	    Meteor.loginWithPassword(userMail, password, function(err){
 	      	if (err) {
 	            Session.set('displayFailMessage', '' + err);
-	            Session.set('displaySuccessMessage', null);
-	            tmpl.find('#userPassword').value = "";
+	            Session.set('displaySuccessMessage', null);	          
+	            $('#userPassword').val('').select().focus();
 	            
 	      	} else {
 	        	Session.set('displayFailMessage', null);
 	        	Session.set('displaySuccessMessage', 'Has ingresado, Bienvenido');
-	        	tmpl.find('#userMail').value = "";
-	        	tmpl.find('#userPassword').value = "";
+	        	$('#userMail').val('');
+	        	$('#userPassword').val('');	        	
 	      	}
 
     	});
