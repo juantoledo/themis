@@ -1,3 +1,11 @@
+Meteor.publish("laws", function(){
+	return Laws.find();
+})
+
+Meteor.publish("userLaws", function(userid){
+	return Laws.find({owner: userid}, {sort:{date: -1}});
+})
+
 Meteor.methods({
 		
 	'addUserLaw':function(options){

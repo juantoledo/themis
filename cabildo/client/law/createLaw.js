@@ -1,9 +1,4 @@
 Template.createLaw.rendered = function(){
-	Deps.autorun(function(){
-		Meteor.subscribe("laws");
-
-	});
-
   Session.set('createLawFailMessage', null);
   Session.set('createLawSuccessMessage', null);
 }
@@ -72,10 +67,4 @@ Template.createLaw.events({
 
 })
 
-
-function getUserName(user){
-  if(user == null){
-    return null;
-  }
-  return user.profile.name;
-}
+ 

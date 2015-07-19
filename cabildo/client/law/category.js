@@ -47,7 +47,11 @@ Template.category.events({
 	   
 	},	
 	'autocompleteselect #autocompleteCategory' : function(event, template, doc) {
-	    addCategorySelected(doc.type);
+	    categoryType = doc.type;
+      categoryBackground = doc.background;
+
+      addCategorySelected(doc.type, doc.background);
+
       $( "#lawCategory" ).val('');
 	},
 
@@ -77,7 +81,7 @@ Template.category.events({
 });
 
 
-addCategorySelected = function(categoryType) {
+addCategorySelected = function(categoryType, background) {
   var categoriesSelected = Session.get('categoriesSelected');
 
   if(existCategorySelected(categoryType)){
@@ -88,7 +92,7 @@ addCategorySelected = function(categoryType) {
 
   Session.set('categoriesSelected', categoriesSelected);
 
-  var newdiv = '<div id="deleteCategory">' + categoryType + ' </div>';
+  var newdiv = '<span id="deleteCategory" class="cat" style="background: ' + background + '">' + categoryType + ' </span>';
   var categoriesPlace =  $( "#categoriesPlace" );   
   categoriesPlace.append(newdiv);
 }

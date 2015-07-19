@@ -6,9 +6,7 @@ Router.route('/createLaw', function () {
   this.render('createLaw'); 
 });
 
-Router.route('/law', function () {
-  this.render('law'); 
-});
+
 
 Router.route('/main', function () {
   this.render('main'); 
@@ -32,5 +30,14 @@ Router.route('/login', function () {
 
 Router.route('/registry', function () {
   this.render('registry'); 
+});
+
+Router.map(function(){
+	this.route('law', {
+		path:'/law:_id',
+		data:function(){
+			return Laws.findOne({_id:this.params._id});
+		}
+	})
 });
 
