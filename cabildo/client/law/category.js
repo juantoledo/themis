@@ -1,6 +1,6 @@
 Template.category.rendered = function(){
 	Deps.autorun(function(){
-		Meteor.subscribe("laws");
+		
 		Meteor.subscribe("categories");
     	Session.set('categoriesSelected', []);	
 	})
