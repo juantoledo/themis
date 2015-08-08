@@ -1,0 +1,16 @@
+<template name="categoryLaws">
+	{{> header}}
+
+	<div class="container">
+		
+		<h3>Leyes de la categoria {{categorySelected}}</h3>
+		<div class="row user-laws">
+
+			{{#each categoryLaws}}
+				{{> userLaw}}
+			{{/each}}
+			
+		</div>
+	</div>
+  
+</template>

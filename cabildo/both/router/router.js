@@ -41,3 +41,33 @@ Router.map(function(){
 	})
 });
 
+Router.map(function(){
+  this.route('categoryLaws', {
+    path:'/type:type',
+    waitOn: function() {
+      return Meteor.subscribe('laws');
+    },
+    data: function () {
+      templateData = {  categoryLaws: Laws.find({"categories":this.params.type}),
+                        categorySelected: this.params.type };
+      return templateData;
+    }
+
+ //   data: {
+ //     posts: [
+ //       {
+ //         title: 'Did you know that...',
+ //         text: 'If you yelled for 8 years, 7 months and 6 days, you would have produced enough sound energy to heat up one cup of coffee.'
+ //       },
+ //       {
+ //         title: 'Hello World',
+ //         text: 'Hi, i am new here!'
+ //       }
+ //     ],
+ //     lawss: [Laws.find({})]
+ //   }
+
+  })
+});
+
+

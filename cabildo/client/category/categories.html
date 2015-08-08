@@ -5,26 +5,19 @@
 
 		<h2>Categorías</h2>
 		<div class="row laws-category">
-			<div class="col-md-6">
-				<div class="laws-category-item cat-ciudadania">
-					<h3><a href="lawSearch">Ciudadanía</a> 78</h3>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="laws-category-item cat-turismo">
-					<h3><a href="lawSearch">Turismo</a> 23</h3>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="laws-category-item cat-interior">
-					<h3><a href="lawSearch">Interior</a> 89</h3>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="laws-category-item cat-deporte">
-					<h3><a href="lawSearch">Deporte</a> 109</h3>
-				</div>
-			</div>
+			{{#each categoryLaws}}
+				{{> categoryLaw}}
+			{{/each}}
+			
 		</div>						
+	</div>
+</template>
+
+<template name="categoryLaw">
+	<div class="col-md-6">
+		<div class="laws-category-item" style="background: {{background}}">
+			<h3><a href="{{pathFor 'categoryLaws'}}">{{type}}</a> </h3>
+
+		</div>
 	</div>
 </template>
