@@ -6,7 +6,9 @@ Router.route('/createLaw', function () {
   this.render('createLaw'); 
 });
 
-
+Router.route('/createCongressLaw', function () {
+  this.render('createCongressLaw'); 
+});
 
 Router.route('/main', function () {
   this.render('main'); 

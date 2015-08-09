@@ -19,7 +19,13 @@
 				<ul class="nav navbar-nav">
 					<li>
 						 <p class="navbar-btn">
-                    		<a href="createLaw" class="btn btn-default createlaw-btn">Crea tu Ley</a>
+						 	{{#if isInRole 'admin-user'}}
+    							<a href="createCongressLaw" class="btn btn-default createlaw-btn">Crea Ley del Congreso</a>
+  							{{/if}}
+  							{{#if isInRole 'councilor-user'}}
+    							<a href="createLaw" class="btn btn-default createlaw-btn">Crea tu Ley</a>
+  							{{/if}}
+                    		
                 		</p>
 					</li>
 				</ul>
@@ -30,9 +36,11 @@
 					<li>
 						<a href="categories">Categorias</a>
 					</li>
-					<li>
-						<a href="userLaws">Mis Leyes</a>
-					</li>
+					{{#if isInRole 'councilor-user'}}
+						<li>
+    						<a href="userLaws">Mis Leyes</a>
+						</li>
+					{{/if}}
 					<li>
 						<a href="lawSearch">Buscador de Leyes</a>
 					</li>
