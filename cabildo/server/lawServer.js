@@ -15,7 +15,30 @@ Meteor.methods({
 			categories: options.categories,
 			owner: Meteor.userId(),
 			createdBy:options.createdBy,
-			date: new Date() 
+			date: new Date(),
+			type: 1 
+		}
+		Laws.insert(law);
+	},
+
+	'addCongressLaw':function(options){
+		console.log('--------' + options);
+
+		var law = {
+			lawTitle: options.lawTitle,
+			lawContent: options.lawContent,
+			categories: options.categories,
+			owner: Meteor.userId(),
+			createdBy:options.createdBy,
+			type: 2,
+			legislature: options.lawLegislature,
+			dateAdmision: options.lawDateAdmision,
+            state: options.lawState,
+            bulletin: options.lawBulletinNumber,
+            matter: options.lawMatter,
+            initiative: options.lawInitiative,
+            chamberOrigin: options.lawChamberOrigin,
+            date: new Date()
 		}
 		Laws.insert(law);
 	}

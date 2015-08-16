@@ -36,13 +36,16 @@
 					<li>
 						<a href="categories">Categorias</a>
 					</li>
-					{{#if isInRole 'councilor-user'}}
+					{{#if isInRole 'councilor-user,admin-user'}}
 						<li>
     						<a href="userLaws">Mis Leyes</a>
 						</li>
 					{{/if}}
 					<li>
 						<a href="lawSearch">Buscador de Leyes</a>
+					</li>
+					<li>
+						<a href="deputies">Diputados</a>
 					</li>
 					
 					<li>

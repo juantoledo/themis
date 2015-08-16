@@ -34,6 +34,10 @@ Router.route('/registry', function () {
   this.render('registry'); 
 });
 
+Router.route('/deputies', function () {
+  this.render('deputies'); 
+});
+
 Router.map(function(){
 	this.route('law', {
 		path:'/law:_id',
@@ -41,6 +45,16 @@ Router.map(function(){
 			return Laws.findOne({_id:this.params._id});
 		}
 	})
+});
+
+Router.map(function(){
+  this.route('deputy', {
+    path:'/deputy:_id',
+    data:function(){
+      depus = Deputies.findOne({_id:this.params._id});
+      return depus;
+    }
+  })
 });
 
 Router.map(function(){
