@@ -12,6 +12,20 @@ Meteor.methods({
 			}}});
 
 	
+	},
+
+	'addCouncilorVote':function(options){
+	
+		Laws.update(options.lawId, { $pull: { councilorVotes: {			
+				councilorId: options.councilorId
+			}}});	
+
+		Laws.update(options.lawId, { $push: { councilorVotes: {
+				type: options.typeVote,			
+				councilorId: options.councilorId
+			}}});
+
+	
 	}		
 	
 })

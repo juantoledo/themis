@@ -1,0 +1,44 @@
+<template name="comments">
+	
+	 <form >
+	 	<textarea rows="4" cols="50" name="newCommentInput" id="newCommentInput" value="" placeholder="Pensando en algo a comentar" style="width: auto; height: auto;" class="input-xxlarg" ></textarea>
+		
+	</form>	
+
+	 <button id="submitCommentLaw">Publicar Comentario</button>
+
+	{{#each comments}}
+		{{>comment}}
+	{{/each}}
+
+
+</template>
+
+<template name="comment">
+
+	<div>
+		{{#if modeEditComment}}
+			<span class="text">
+				<strong>{{createdBy}}</strong>
+				- 
+				<textarea rows="3" cols="50" name="editedComment" id="editedComment" value="{{commentText}}" style="width: auto;" class="input-xxlarg lawComment" ></textarea>
+			</span>
+			<button id="publishCommentButton">Publicar Edición</button>
+			
+		{{else}}
+				
+			<span class="text">
+				<strong>{{createdBy}}</strong>
+				-
+				<textarea rows="2" cols="50" name="lawComment" id="lawComment" value="{{commentText}}" style="width: auto;" class="input-xxlarg lawComment" readonly="true" ></textarea>
+			</span>
+
+			{{#if hasEditPermissions}}
+				<button id="editCommentButton">Editar</button>
+			{{/if}}
+		{{/if}}		
+	
+		
+	</div>
+
+</template>

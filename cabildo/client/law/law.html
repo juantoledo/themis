@@ -12,9 +12,10 @@
 		</p>
 		<div class="row law-box">
 			<div class="col-md-8">
-				<div class="law-content">
-                    {{lawContent}}{{createLawIdSession}}
-				</div>
+				
+				<textarea rows="4" cols="100" name="lawContent" id="lawContent" value="{{lawContent}}" style="width: auto;" class="input-xxlarg lawContent" readonly="true"></textarea>
+                 {{createLawIdSession}}
+				
 				<div class="law-share">
 					<p>
 						<a href="#">facebook</a>
@@ -26,16 +27,23 @@
 			</div>
 			<div class="col-md-4 comments">
 				<h3>Me gusta o no me gusta?</h3>
-				(aquí iría la funcionalidad de rating, ya sea estrellitas, caritas, me gusta, etc)
-
+					{{#if isInRole 'councilor-user,admin-user'}}
+    					{{ >councilorVote}}
+    				{{else}}
+    					Registrate para votar
+  					{{/if}}
+					
 				<h3>Debate/Comentarios</h3>
-				<p>Widget o coso para comentar</p>
+				{{ >comments}}
 			</div>
 		</div>
+
 
 		{{#if isInRole 'admin-user'}}
   			{{ >congressVote}}
   		{{/if}}
+
+  		
 
 	</div>
 </template>
