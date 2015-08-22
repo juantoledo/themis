@@ -3,12 +3,18 @@
 		<div class="layer">
 			<div class="header-content">
 				<div class="header-content-inner">
-					<h2><a href="law">Los ciudadanos chilenos en el extranjero tienen derecho a votaciones presidenciales y parlamentarias</a></h2>
-					<hr>
-					<p>Redactor: <a href="#">Pepito</a> | <a href="#">Hace 5 minutos</a></p>
+					{{ >randomLaw}}
 					<a href="createLaw" class="btn btn-primary btn-xl createlaw-btn">Crea tu Ley</a>
 				</div>
 			</div>
 		</div>
 	</header>
+</template>
+
+<template name="randomLaw">
+	{{#with law}}
+		<h2><a href="{{pathFor 'law'}}">{{lawTitle}}</a></h2>
+		<hr>
+		<p>Redactor: <a href="#">{{createdBy}}</a> | <a href="#">{{createdTimer}}</a></p>
+	{{/with}}
 </template>

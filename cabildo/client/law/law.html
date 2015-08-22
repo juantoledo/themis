@@ -13,7 +13,7 @@
 		<div class="row law-box">
 			<div class="col-md-8">
 				<div class="law-content">
-                    {{lawContent}}
+                    {{lawContent}}{{createLawIdSession}}
 				</div>
 				<div class="law-share">
 					<p>
@@ -32,5 +32,10 @@
 				<p>Widget o coso para comentar</p>
 			</div>
 		</div>
+
+		{{#if isInRole 'admin-user'}}
+  			{{ >congressVote}}
+  		{{/if}}
+
 	</div>
 </template>

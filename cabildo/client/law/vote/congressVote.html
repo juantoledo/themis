@@ -1,0 +1,41 @@
+<template name="congressVote">
+   
+    <br>
+	<div>
+		<h2>Votación de diputados</h2>
+		{{#each deputiesVote}}
+			
+
+		    <div class="media">         
+				<a class="pull-left" href="#">
+					<img width="50px" src="deputies/{{_id}}.jpeg" class="media-object" data-src="holder.js/64x64"/>
+				</a>
+
+				<div class="media-body">
+
+					<div>
+						<h4>nombre: <a href="{{pathFor 'deputy'}}">{{name}}</a></h4> 			
+				    </div>
+				    <br /> 
+				    <a class="fingerUp muted">
+						<img width="20px" src="finger_up.png" class="media-object" data-src="holder.js/64x64"/>
+						<p>{{totalFingerUp}}</p>
+						<p>{{fingerUpText}}</p>
+
+					</a>
+					<a class="fingerDown muted">
+						<img width="30px" src="finger_down.png" class="media-object" data-src="holder.js/64x64"/>
+						<p>{{totalFingerDown}}</p>
+						<p>{{fingerDownText}}</p>
+					</a>
+					<a class="fingerAbstention muted">
+						<img width="30px" src="abstention.png" class="media-object" data-src="holder.js/64x64"/>
+						<p>{{totalAbstention}}</p>
+						<p>{{fingerAbstention}}</p>
+					</a>
+				</div>
+			</div>
+
+	    {{/each}}
+	</div>
+</template>
