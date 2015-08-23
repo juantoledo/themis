@@ -35,11 +35,7 @@
 				<div class="listas-box">
 					<h3>Más Votados</h3>
 					<ul>
-						<li><a href="law" > Derecho a un canal cultural gratis y sin comerciales</a></li>
-						<li><a href="law" > Cada comuna debe destinar una vía exclusiva de sus principales avenidas para desplazamiento de bicicletas</a></li>
-						<li><a href="law" > Cada niño tiene derecho a un volantín regalado por el gobierno cuando cumpla 7 años</a></li>
-						<li><a href="law" > Cuando llueva, todos los chilenos podrán trabajar de la casa con sopaipillas</a></li>
-						<li><a href="law" > A los 40, los chilenos jubilarán con pensión alimenticia de Codelco</a></li>
+						{{ >moreVotedLaws}}
 					</ul>
 				</div>
 
@@ -48,11 +44,7 @@
 				<div class="listas-box">
 					<h3>Más Comentados</h3>
 					<ul>
-						<li><a href="law" > Derecho a un canal cultural gratis y sin comerciales</a></li>
-						<li><a href="law" > Cada comuna debe destinar una vía exclusiva de sus principales avenidas para desplazamiento de bicicletas</a></li>
-						<li><a href="law" > Cada niño tiene derecho a un volantín regalado por el gobierno cuando cumpla 7 años</a></li>
-						<li><a href="law" > Cuando llueva, todos los chilenos podrán trabajar de la casa con sopaipillas</a></li>
-						<li><a href="law" > A los 40, los chilenos jubilarán con pensión alimenticia de Codelco</a></li>
+						{{ >moreCommentedLaws}}
 					</ul>
 				</div>
 
@@ -70,6 +62,19 @@
 	{{/each}}
 </template>
 
+<template name="moreVotedLaws">
+
+	{{#each moreVotedLaws}}
+		<li><a href="{{pathFor 'law'}}">{{lawTitle}}</a></li>
+	{{/each}}
+</template>
+
+<template name="moreCommentedLaws">
+
+	{{#each moreCommentedLaws}}
+		<li><a href="{{pathFor 'law'}}">{{lawTitle}}</a></li>
+	{{/each}}
+</template>
 
 
 

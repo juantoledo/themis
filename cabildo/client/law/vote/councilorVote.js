@@ -11,9 +11,12 @@ Template.councilorVote.events({
 		var lawId = template.data._id;
 		var councilorId = Meteor.userId();
 		
+		var hasOldVote = Laws.find({_id:lawId, "councilorVotes.councilorId": Meteor.userId()}).count() > 0;
+
 		var options = {lawId: lawId,
 						typeVote: typeVote,
-						councilorId: councilorId};
+						councilorId: councilorId,
+						hasOldVote: hasOldVote};
 
 		Meteor.call('addCouncilorVote', options);
 	},
@@ -23,9 +26,13 @@ Template.councilorVote.events({
 		var lawId = template.data._id;
 		var councilorId = Meteor.userId();
 		
+		var hasOldVote = Laws.find({_id:lawId, "councilorVotes.councilorId": Meteor.userId()}).count() > 0;
+
+
 		var options = {lawId: lawId,
 						typeVote: typeVote,
-						councilorId: councilorId};
+						councilorId: councilorId,
+						hasOldVote: hasOldVote};
 
 		Meteor.call('addCouncilorVote', options);
 	},
@@ -36,9 +43,12 @@ Template.councilorVote.events({
 		var lawId = template.data._id;
 		var councilorId = Meteor.userId();
 		
+		var hasOldVote = Laws.find({_id:lawId, "councilorVotes.councilorId": Meteor.userId()}).count() > 0;
+
 		var options = {lawId: lawId,
 						typeVote: typeVote,
-						councilorId: councilorId};
+						councilorId: councilorId,
+						hasOldVote: hasOldVote};
 
 		Meteor.call('addCouncilorVote', options);
 	}

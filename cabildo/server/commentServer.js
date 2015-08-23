@@ -5,6 +5,21 @@ Meteor.publish("comments", function(){
 Meteor.methods({
 		
 	'addComment':function(options){
+		var currentLaw = Laws.findOne({_id:options.lawId});	
+
+		var commentsQuantity = currentLaw.commentsQuantity;
+		if(commentsQuantity == undefined){
+			commentsQuantity = 1;
+		}
+		else{			
+			commentsQuantity = commentsQuantity + 1;
+		}
+
+		Laws.update(options.lawId, { 
+			$set: {commentsQuantity: commentsQuantity}
+		});
+
+
 		var comment = {
 			commentText:options.commentText,
 			owner:Meteor.userId(),

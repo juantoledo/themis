@@ -21,7 +21,7 @@
 			<span class="text">
 				<strong>{{createdBy}}</strong>
 				- 
-				<textarea rows="3" cols="50" name="editedComment" id="editedComment" value="{{commentText}}" style="width: auto;" class="input-xxlarg lawComment" ></textarea>
+				<textarea rows="3" cols="50" name="editedComment" id="editedComment" value="{{commentText}}" style="width: auto; height: auto;" class="input-xxlarg lawComment" ></textarea>
 			</span>
 			<button id="publishCommentButton">Publicar Edición</button>
 			
@@ -30,7 +30,7 @@
 			<span class="text">
 				<strong>{{createdBy}}</strong>
 				-
-				<textarea rows="2" cols="50" name="lawComment" id="lawComment" value="{{commentText}}" style="width: auto;" class="input-xxlarg lawComment" readonly="true" ></textarea>
+				<textarea rows="3" cols="50" name="lawComment" id="lawComment" value="{{commentText}}" style="width: auto; height: auto;" class="input-xxlarg lawComment" readonly="true" ></textarea>
 			</span>
 
 			{{#if hasEditPermissions}}
