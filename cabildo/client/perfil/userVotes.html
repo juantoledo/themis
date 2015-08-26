@@ -1,0 +1,16 @@
+<template name="userVotes">
+	{{ >header}}
+	
+	<div class="container">
+		<h2>Usuario {{userName}}</h2>
+		<h3>Mis Leyes Votadas</h3>
+		<div class="row user-laws">
+
+			{{#each laws}}
+				{{> userLaw}}
+			{{/each}}
+			
+		</div>
+	</div>
+	
+</template>

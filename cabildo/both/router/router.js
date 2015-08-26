@@ -22,6 +22,14 @@ Router.route('/userLaws', function () {
   this.render('userLaws'); 
 });
 
+Router.route('/myPerfil', function () {
+  this.render('myPerfil'); 
+});
+
+Router.route('/userVotes', function () {
+  this.render('userVotes'); 
+});
+
 Router.route('/lawSearch', function () {
   this.render('lawSearch'); 
 });
@@ -53,6 +61,16 @@ Router.map(function(){
     data:function(){
       depus = Deputies.findOne({_id:this.params._id});
       return depus;
+    }
+  })
+}); 
+
+Router.map(function(){
+  this.route('userPerfil', {
+    path:'/userPerfil:owner',
+    data:function(){
+      var usrsss = Meteor.users.findOne({_id:this.params.owner});
+      return Meteor.users.findOne({_id:this.params.owner});
     }
   })
 });

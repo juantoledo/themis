@@ -15,6 +15,6 @@
 	{{#with law}}
 		<h2><a href="{{pathFor 'law'}}">{{lawTitle}}</a></h2>
 		<hr>
-		<p>Redactor: <a href="#">{{createdBy}}</a> | <a href="#">{{createdTimer}}</a></p>
+		<p>Redactor: <a href="{{pathFor 'userPerfil'}}">{{createdBy}}</a> | <a href="#">{{createdTimer}}</a></p>
 	{{/with}}
 </template>

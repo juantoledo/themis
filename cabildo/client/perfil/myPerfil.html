@@ -1,0 +1,21 @@
+<template name="myPerfil">
+	{{ >header}}	
+
+	<div class="hero-unit">
+		
+		{{#with currentUser}}
+	    	<div>
+	    		Correo electrónico: {{currentUser.emails.[0].address}} 
+	    		<br />
+	    		Nombre usuario: {{currentUser.profile.name}} 
+	    		<br />	  
+
+	       		<br />
+
+		     </div>
+		{{/with}}
+		   
+	</div>
+		
+		
+</template>

@@ -6,6 +6,10 @@ Meteor.publish("userLaws", function(userid){
 	return Laws.find({owner: userid}, {sort:{date: -1}});
 })
 
+Meteor.publish("userVotes", function(userid){
+	return Laws.find({owner: userid}, {sort:{date: -1}});
+})
+
 Meteor.methods({
 		
 	'addUserLaw':function(options){
