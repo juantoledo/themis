@@ -1,11 +1,17 @@
+Template.navigation.rendered = function(){
+	Deps.autorun(function(){
+		Meteor.subscribe("cabildoUsers");
+	})
+}
+
 Template.navigation.userName = function(){
 
-  	var user = Meteor.users.findOne({_id:Meteor.userId()});
+  	var user = CabildoUsers.findOne({_id:Meteor.userId()});
 
   	if(user == undefined){
   		return 'Usuario no registrado';
   	}
-	return 'Usuario: ' + user.profile.name;
+	return 'Usuario: ' + user.name;
 }
 
 Template.navigation.isLogged = function(){

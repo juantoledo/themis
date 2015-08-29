@@ -68,9 +68,11 @@ Router.map(function(){
 Router.map(function(){
   this.route('userPerfil', {
     path:'/userPerfil:owner',
+    waitOn: function() {
+      return Meteor.subscribe('cabildoUsers');
+    },
     data:function(){
-      var usrsss = Meteor.users.findOne({_id:this.params.owner});
-      return Meteor.users.findOne({_id:this.params.owner});
+      return CabildoUsers.findOne({_id:this.params.owner});
     }
   })
 });

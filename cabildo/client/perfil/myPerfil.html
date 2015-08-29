@@ -5,9 +5,19 @@
 		
 		{{#with currentUser}}
 	    	<div>
-	    		Correo electrónico: {{currentUser.emails.[0].address}} 
+	    		Correo electrónico: {{email}} 
+	    	
 	    		<br />
-	    		Nombre usuario: {{currentUser.profile.name}} 
+	    		Nombre usuario: 
+
+	    		{{#if editNameMode}}
+	    			<input type="text" id="userName" value="{{name}}" />
+	    			<button id="editName">Editar</button>
+	    		{{else}}
+	    			{{name}}
+	    			<button id="initiateEditName">Editar</button>
+	    		{{/if}}
+
 	    		<br />	  
 
 	       		<br />
