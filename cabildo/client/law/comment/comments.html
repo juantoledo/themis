@@ -28,7 +28,7 @@
 		{{else}}
 				
 			<span class="text">
-				<strong>{{createdBy}}</strong>
+				<strong><a href="{{pathFor 'userPerfil'}}">{{createdBy}}</a></strong>
 				-
 				<textarea rows="3" cols="50" name="lawComment" id="lawComment" value="{{commentText}}" style="width: auto; height: auto;" class="input-xxlarg lawComment" readonly="true" ></textarea>
 			</span>

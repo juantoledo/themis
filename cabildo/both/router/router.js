@@ -56,6 +56,15 @@ Router.map(function(){
 });
 
 Router.map(function(){
+  this.route('lawFromNotifications', {
+    path:'/law:lawId',
+    data:function(){
+      return Laws.findOne({_id:this.params.lawId});
+    }
+  })
+});
+
+Router.map(function(){
   this.route('deputy', {
     path:'/deputy:_id',
     data:function(){

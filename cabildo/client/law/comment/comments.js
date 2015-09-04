@@ -38,6 +38,7 @@ Template.comments.events({
 		Meteor.call('addComment', options);
 		$('#newCommentInput').val("").select().focus();
 		
+		makeFollowerNotifications(lawId, this.followers, this.lawTitle);
 	}
 
 })
@@ -55,9 +56,25 @@ Template.comment.events({
 		var _id = tmpl.data._id;
 		var options = {commentText:commentText,
 						_id:_id};
-			
+		
 		Meteor.call('editComment', options);
 		Session.set('currentComentaryToEdit', undefined);		
 	}
 
 })
+
+function makeFollowerNotifications(lawId, followers, lawTitle){
+	if(followers != undefined){
+		for(var i = 0; i < followers.length; i++){
+			if(Meteor.userId() == followers[i].follower){
+				continue;
+			}
+			var options = { lawId: lawId,
+							follower: followers[i].follower,
+							lawTitle: lawTitle,
+							type: 5}
+
+			Meteor.call('addUserCommentNotification', options);
+		}
+	}
+}

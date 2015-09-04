@@ -15,8 +15,13 @@
 	    			<button id="editName">Editar</button>
 	    		{{else}}
 	    			{{name}}
-	    			<button id="initiateEditName">Editar</button>
+	    			<!--<button id="initiateEditName">Editar</button> -->
 	    		{{/if}}
+	    		<br/>
+	    		{{#if isInRole 'admin-user'}}
+    				<button id="generateLawClosedNotifications">Generar notificaciones para leyes cerradas</button>
+  				{{/if}}
+
 
 	    		<br />	  
 

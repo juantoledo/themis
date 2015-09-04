@@ -58,6 +58,15 @@ Meteor.methods({
    
 
         Roles.addUsersToRoles(userId, roles);
+        
+        var cabildoUser = {
+            _id: userId,
+            email: options.userMail,
+            name: options.userName,
+            createdBy: Meteor.userId(),
+            date: new Date()
+        }
+        CabildoUsers.insert(cabildoUser);
 
 
     }

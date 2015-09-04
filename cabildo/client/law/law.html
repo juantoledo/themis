@@ -6,9 +6,16 @@
 	<div class="container">
 		<h2>{{lawTitle}}</h2>
 		<p class="law-data">
-			<span class="author">Autor: <a href="#">{{createdBy}}</a></span>
-			<span class="colaborator">Colaboradores: <em>12</em></span>
+			<span class="author">Autor:  <a href="{{pathFor 'userPerfil'}}">{{createdBy}}</a></span>
+			<span class="colaborator">Seguidores: <em>12</em></span>
 			<span class="opinions">Visitas: <em>65.984</em></span>
+			{{#if isInRole 'councilor-user,admin-user'}}
+				{{#if isFollower}}
+					<button id="unFollowLaw">Dejar de seguir ley</button>
+				{{else}}
+					<button id="followLaw">Seguir ley</button>
+				{{/if}}
+			{{/if}}
 		</p>
 		<div class="row law-box">
 			<div class="col-md-8">
@@ -22,6 +29,7 @@
 						<a href="#">twitter</a>
 						<a href="#">google +</a>
 						<a href="#">pinterest</a>
+
 					</p>
 				</div>
 			</div>
@@ -41,6 +49,8 @@
 
 		{{#if isInRole 'admin-user'}}
   			{{ >congressVote}}
+    		<button id="closeCongressLaw">Cerrar la ley de congreso</button>
+  					
   		{{/if}}
 
   		

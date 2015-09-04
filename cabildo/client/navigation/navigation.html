@@ -67,7 +67,23 @@
 					<li>
 						<a href="registry">Registrar</a>
 					</li>
+					{{#if isInRole 'councilor-user,admin-user'}}
+						<li>
+							<div id="userNotifications">Notificaciones {{pendentNotifications.length}} </div>
+						</li>
+					{{/if}}
 				</ul>
+				<div id="notificationsDialog" title="Notificaciones pendientes">
+					{{#each pendentNotifications}}
+						<div>
+							<a href="{{pathFor 'lawFromNotifications'}}">
+								{{lawTitle}}
+								<br />
+								{{messageType}}
+							</a>
+						</div>
+					{{/each}}
+				</div>
 			</div>
 		</div>
 	</nav>

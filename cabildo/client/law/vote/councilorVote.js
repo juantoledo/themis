@@ -109,7 +109,7 @@ Template.councilorVote.helpers({
 	totalAbstention: function () {
 		var lawId = this._id;
 		
-		var lawWithDeclineVotes = Laws.find({_id:lawId, "councilorVotes.type":2}).fetch();
+		var lawWithDeclineVotes = Laws.find({_id:lawId, "councilorVotes.type":0}).fetch();
 
 		return countVotes(lawWithDeclineVotes[0], 0);
 	}

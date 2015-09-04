@@ -17,24 +17,26 @@ Meteor.methods({
 			lawTitle: options.lawTitle,
 			lawContent: options.lawContent,
 			categories: options.categories,
+			type: 1,
+			state: 1,
 			owner: Meteor.userId(),
-			createdBy:options.createdBy,
-			date: new Date(),
-			type: 1 
+			createdBy: options.createdBy,
+			dateClose: options.dateClose,
+			date: new Date()
 		}
 		Laws.insert(law);
 	},
 
 	'addCongressLaw':function(options){
-		console.log('--------' + options);
-
+		
 		var law = {
 			lawTitle: options.lawTitle,
 			lawContent: options.lawContent,
 			categories: options.categories,
+			type: 2,
+			state: 1,
 			owner: Meteor.userId(),
 			createdBy:options.createdBy,
-			type: 2,
 			legislature: options.lawLegislature,
 			dateAdmision: options.lawDateAdmision,
             state: options.lawState,
@@ -45,6 +47,28 @@ Meteor.methods({
             date: new Date()
 		}
 		Laws.insert(law);
-	}
+	},
+
+	'closeLaw':function(options){
+		Laws.update(options.lawId, { $set: { state: 2} });		
+	},
+
+	'userFollowLaw':function(options){
+
+		Laws.update(options.lawId, { $push: { 
+			followers: {
+				follower: Meteor.userId()
+			}
+		}});
+	},
+
+	'userUnfollowLaw': function(options){
+
+		Laws.update(options.lawId, { $pull: { 
+			followers: {			
+				follower: Meteor.userId()
+			}
+		}});
+	}	
 					
 })
