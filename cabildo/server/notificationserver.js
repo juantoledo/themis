@@ -16,7 +16,13 @@ Meteor.methods({
  
 	'addUserCommentNotification': function(options){
 		
-		var notification = CabildoUsers.findOne({$or: [{_id: options.follower, "notifications.lawId": options.lawId, "notifications.type": 5},{_id: options.follower, "notifications.lawId": options.lawId, "notifications.type": 6}]}, {"notifications.$": 1});
+		var notification = CabildoUsers.findOne(
+			{$or: 
+				[{_id: options.follower, "notifications.lawId": options.lawId, 
+					"notifications.type": NOTIFICATION_TYPE_USER_LAW_WITH_COMMENTS},
+				{_id: options.follower, "notifications.lawId": options.lawId, 
+					"notifications.type": NOTIFICATION_TYPE_CONGRESS_LAW_WITH_COMMENTS}]}, 
+			{"notifications.$": 1});
 
 		if(notification != undefined && notification.notifications != undefined){
 			var comments = notification.notifications[0].comments;
@@ -35,7 +41,7 @@ Meteor.methods({
 				notifications: {
 					lawId: options.lawId, 	
 					lawTitle: options.lawTitle,	
-					state: 1,
+					state: NOTIFICATION_STATE_NO_VIEW,
 					type: options.type,
 					date: new Date(),
 					comments: comments

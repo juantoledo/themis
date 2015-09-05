@@ -35,10 +35,14 @@ Template.comments.events({
 
 		var options = {commentText:commentText, createdBy:userName, lawId:lawId};
 			
+		var type = getTypeNotification(this.type);
+
 		Meteor.call('addComment', options);
 		$('#newCommentInput').val("").select().focus();
 		
-		makeFollowerNotifications(lawId, this.followers, this.lawTitle);
+		if(this.state == LAW_STATE_IN_PROGRESS){
+			makeFollowerNotifications(lawId, this.followers, this.lawTitle, type);
+		}
 	}
 
 })
@@ -63,18 +67,31 @@ Template.comment.events({
 
 })
 
-function makeFollowerNotifications(lawId, followers, lawTitle){
+function makeFollowerNotifications(lawId, followers, lawTitle, notificationType){
 	if(followers != undefined){
 		for(var i = 0; i < followers.length; i++){
 			if(Meteor.userId() == followers[i].follower){
 				continue;
 			}
+
 			var options = { lawId: lawId,
 							follower: followers[i].follower,
 							lawTitle: lawTitle,
-							type: 5}
+							type: notificationType}
 
 			Meteor.call('addUserCommentNotification', options);
 		}
 	}
+}
+
+function getTypeNotification(lawType){
+	var notificationType = NOTIFICATION_TYPE_USER_LAW_WITH_COMMENTS;
+	if(lawType == LAW_TYPE_USER){
+		notificationType = NOTIFICATION_TYPE_USER_LAW_WITH_COMMENTS;
+	}
+	else if(lawType == LAW_TYPE_CONGRESS){
+		notificationType = NOTIFICATION_TYPE_CONGRESS_LAW_WITH_COMMENTS;
+	}
+
+	return notificationType;
 }
