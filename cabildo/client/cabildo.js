@@ -23,7 +23,6 @@ Template.recentLaws.recentLaws = function(){
 }
 
 Template.moreVotedLaws.moreVotedLaws = function(){
-	
 	return Laws.find({}, { sort: [["votesQuantity", "desc"]], limit:5 });
 }
 

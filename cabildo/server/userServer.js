@@ -40,7 +40,8 @@ Meteor.methods({
             email: options.userMail,
             name: options.userName,
             createdBy: Meteor.userId(),
-            date: new Date()
+            date: new Date(),
+            notifications: []
         }
         CabildoUsers.insert(cabildoUser);
 	},
@@ -64,7 +65,8 @@ Meteor.methods({
             email: options.userMail,
             name: options.userName,
             createdBy: Meteor.userId(),
-            date: new Date()
+            date: new Date(),
+            notifications: []
         }
         CabildoUsers.insert(cabildoUser);
 

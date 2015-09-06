@@ -1,7 +1,6 @@
 Template.councilorVote.rendered = function(){
 	Deps.autorun(function(){
 		Meteor.subscribe("laws");
-		
 	})
 }
 
@@ -19,6 +18,13 @@ Template.councilorVote.events({
 						hasOldVote: hasOldVote};
 
 		Meteor.call('addCouncilorVote', options);
+
+		if(!hasOldVote && this.state == LAW_STATE_IN_PROGRESS){
+			if(hasToNotify(this.votesQuantity + 1)){
+				var type = getTypeNotification(this.type);
+				makeVotesNotifications(lawId, this.followers, this.lawTitle, type, this.votesQuantity + 1);
+			}
+		}
 	},
 
 	"click .fingerDown": function (event, template) {
@@ -35,6 +41,14 @@ Template.councilorVote.events({
 						hasOldVote: hasOldVote};
 
 		Meteor.call('addCouncilorVote', options);
+
+		if(!hasOldVote && this.state == LAW_STATE_IN_PROGRESS){
+
+			if(hasToNotify(this.votesQuantity + 1)){
+				var type = getTypeNotification(this.type);
+				makeVotesNotifications(lawId, this.followers, this.lawTitle, type, this.votesQuantity + 1);
+			}	
+		}
 	},
 
 
@@ -51,6 +65,16 @@ Template.councilorVote.events({
 						hasOldVote: hasOldVote};
 
 		Meteor.call('addCouncilorVote', options);
+	
+		if(!hasOldVote && this.state == LAW_STATE_IN_PROGRESS){
+
+			if(hasToNotify(this.votesQuantity + 1)){
+				var type = getTypeNotification(this.type);
+				makeVotesNotifications(lawId, this.followers, this.lawTitle, type, this.votesQuantity + 1);
+			}
+
+			
+		}
 	}
 });
 
@@ -68,11 +92,7 @@ Template.councilorVote.helpers({
 	},
 
 	totalFingerUp: function () {
-		var lawId = this._id;
-		
-		var lawWithApprovedVotes = Laws.find({_id:lawId, "councilorVotes.type":1}).fetch();
-
-		return countVotes(lawWithApprovedVotes[0], 1);
+		return this.votesInFavor;
 
 	},
 
@@ -88,11 +108,7 @@ Template.councilorVote.helpers({
 	},
 
 	totalFingerDown: function () {
-		var lawId = this._id;
-		
-		var lawWithDeclineVotes = Laws.find({_id:lawId, "councilorVotes.type":2}).fetch();
-
-		return countVotes(lawWithDeclineVotes[0], 2);
+		return this.votesAgainst;
 	},
 
 	fingerAbstention: function () {
@@ -107,24 +123,46 @@ Template.councilorVote.helpers({
 	},
 
 	totalAbstention: function () {
-		var lawId = this._id;
-		
-		var lawWithDeclineVotes = Laws.find({_id:lawId, "councilorVotes.type":0}).fetch();
-
-		return countVotes(lawWithDeclineVotes[0], 0);
+		return this.votesAbstention;
 	}
 
 });
 
-function countVotes(law, type){
-		var count = 0;
-		if(law != undefined && law.councilorVotes != undefined){
-			for(var i = 0; i < law.councilorVotes.length; i++) {
-			  if(law.councilorVotes[i].type == type){
-			  	count = count + 1;
-			  }
-
+function makeVotesNotifications(lawId, followers, lawTitle, notificationType, votesQuantity){
+	if(followers != undefined){
+		for(var i = 0; i < followers.length; i++){
+			if(Meteor.userId() == followers[i].follower){
+				continue;
 			}
+
+			var options = { lawId: lawId,
+							follower: followers[i].follower,
+							lawTitle: lawTitle,
+							type: notificationType,
+							votesQuantity: votesQuantity }
+
+			Meteor.call('addUserVoteNotification', options);
 		}
-		return count;
 	}
+}
+
+function getTypeNotification(lawType){
+	var notificationType = NOTIFICATION_TYPE_USER_LAW_VOTES;
+	if(lawType == LAW_TYPE_USER){
+		notificationType = NOTIFICATION_TYPE_USER_LAW_VOTES;
+	}
+	else if(lawType == LAW_TYPE_CONGRESS){
+		notificationType = NOTIFICATION_TYPE_CONGRESS_LAW_VOTES;
+	}
+
+	return notificationType;
+}
+
+function hasToNotify(votesQuantity){
+	for(var i = 0; i < VOTES_NOTIFICATIONS.length; i++){
+		if(votesQuantity == VOTES_NOTIFICATIONS[i]){
+			return true;
+		}
+	} 
+	return false;
+}

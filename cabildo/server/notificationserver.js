@@ -61,6 +61,54 @@ Meteor.methods({
 				}
 			}});
 		}
+	},
+
+	'addUserVoteNotification': function(options){
+		
+		console.log('-------------------- before query ');
+		var notification = CabildoUsers.findOne(
+			{$or: 
+				[{_id: options.follower, "notifications.lawId": options.lawId, 
+					"notifications.type": NOTIFICATION_TYPE_USER_LAW_VOTES},
+				{_id: options.follower, "notifications.lawId": options.lawId, 
+					"notifications.type": NOTIFICATION_TYPE_CONGRESS_LAW_VOTES}]}, 
+			{"notifications.$": 1});
+
+		console.log('--------------------' + notification);
+
+		if(notification != undefined && notification.notifications != undefined){
+			
+			CabildoUsers.update(options.follower, { $pull: { 
+				notifications: {
+					lawId: options.lawId,
+					type: options.type
+				}
+			}});
+
+			CabildoUsers.update(options.follower, { $push: { 
+				notifications: {
+					lawId: options.lawId, 	
+					lawTitle: options.lawTitle,	
+					state: NOTIFICATION_STATE_NO_VIEW,
+					type: options.type,
+					date: new Date(),
+					votes: options.votesQuantity
+				}
+			}});
+
+		}
+		else{
+			CabildoUsers.update(options.follower, { $push: { 
+				notifications: {
+					lawId: options.lawId, 	
+					lawTitle: options.lawTitle,	
+					state: 1,
+					type: options.type,
+					date: new Date(),
+					votes: options.votesQuantity
+				}
+			}});
+		}
 	}
 					
 })

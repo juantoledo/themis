@@ -22,7 +22,11 @@ Meteor.methods({
 			owner: Meteor.userId(),
 			createdBy: options.createdBy,
 			dateClose: options.dateClose,
-			date: new Date()
+			date: new Date(),
+			votesQuantity: 0,
+			votesInFavor: 0,
+			votesAgainst: 0,
+			votesAbstention: 0
 		}
 		Laws.insert(law);
 	},
@@ -44,7 +48,11 @@ Meteor.methods({
             matter: options.lawMatter,
             initiative: options.lawInitiative,
             chamberOrigin: options.lawChamberOrigin,
-            date: new Date()
+            date: new Date(),
+            votesQuantity: 0,
+			votesInFavor: 0,
+			votesAgainst: 0,
+			votesAbstention: 0
 		}
 		Laws.insert(law);
 	},
