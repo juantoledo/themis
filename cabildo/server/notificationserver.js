@@ -1,6 +1,14 @@
 Meteor.methods({
 		
 	'addUserNofication':function(options){
+		var notificationsQuantity;
+
+		if(options.counter == undefined || options.counter == 0){
+				var notificationsQuantity = getUserNotificationsQuantity(options.councilorId);
+		}
+		else{
+			notificationsQuantity = options.counter;
+		}
 
 		CabildoUsers.update(options.councilorId, { $push: { 
 			notifications: {
@@ -8,7 +16,8 @@ Meteor.methods({
 				lawTitle: options.lawTitle,	
 				state: options.state,
 				type: options.type,
-				date: new Date()
+				date: new Date(),
+				counter: notificationsQuantity
 			}
 		}});
 
@@ -25,7 +34,7 @@ Meteor.methods({
 			{"notifications.$": 1});
 
 		if(notification != undefined && notification.notifications != undefined){
-			var comments = notification.notifications[0].comments;
+			var comments = notification.notifications[0].number;
 			comments = comments + 1;
 			console.log('comments ' + comments);
 
@@ -44,7 +53,8 @@ Meteor.methods({
 					state: NOTIFICATION_STATE_NO_VIEW,
 					type: options.type,
 					date: new Date(),
-					comments: comments
+					number: comments,
+					counter: options.counter
 				}
 			}});
 
@@ -54,10 +64,11 @@ Meteor.methods({
 				notifications: {
 					lawId: options.lawId, 	
 					lawTitle: options.lawTitle,	
-					state: 1,
+					state: NOTIFICATION_STATE_NO_VIEW,
 					type: options.type,
 					date: new Date(),
-					comments: 1
+					number: 1,
+					counter: options.counter
 				}
 			}});
 		}
@@ -92,7 +103,8 @@ Meteor.methods({
 					state: NOTIFICATION_STATE_NO_VIEW,
 					type: options.type,
 					date: new Date(),
-					votes: options.votesQuantity
+					number: options.votesQuantity,
+					counter: options.counter
 				}
 			}});
 
@@ -102,13 +114,51 @@ Meteor.methods({
 				notifications: {
 					lawId: options.lawId, 	
 					lawTitle: options.lawTitle,	
-					state: 1,
+					state: NOTIFICATION_STATE_NO_VIEW,
 					type: options.type,
 					date: new Date(),
-					votes: options.votesQuantity
+					number: options.votesQuantity,
+					counter: options.counter
 				}
 			}});
 		}
+	},
+	'updateUserNotification' : function(options){
+		
+		CabildoUsers.update(options.follower, { $pull: { notifications: {			
+			lawId: options.lawId,
+			type: options.type
+		}}});	
+
+		CabildoUsers.update(options.follower, { 
+			$push: { 
+				notifications: {
+					lawId: options.lawId, 	
+					lawTitle: options.lawTitle,	
+					state: options.state,
+					type: options.type,
+					date: options.date,
+					number: options.number,
+					counter: options.counter
+				}
+			}			
+		});
 	}
 					
 })
+
+function getUserNotificationsQuantity(councilorId){
+	
+	var notificationsQuantity = 0;
+	var cabildoUser = CabildoUsers.findOne({_id: councilorId});
+	var notifications = cabildoUser.notifications;
+	
+	if(notifications == undefined || notifications.length == 0){
+		notificationsQuantity = 1
+	}
+	else{
+		notificationsQuantity = notifications.length + 1;
+	}
+
+	return notificationsQuantity;
+}

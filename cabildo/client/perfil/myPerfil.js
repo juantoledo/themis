@@ -1,6 +1,6 @@
 Template.myPerfil.rendered = function(){
 	Deps.autorun(function(){
-		Meteor.subscribe("cabildoUsersByUserId", cabildoUsersByUserId);
+		Meteor.subscribe("cabildoUsers");
 		Meteor.subscribe("laws");
 	})
 }
@@ -43,22 +43,26 @@ function notificateClosedLaws(lawsNoClosed){
 		var lawId = lawsNoClosed[i]._id;
 		var lawTitle = lawsNoClosed[i].lawTitle;
 
-	if(lawDateClose < (new Date())){
-		var votes = lawsNoClosed[i].councilorVotes;
+		//if(lawDateClose < (new Date())){
 
-		if(votes != undefined && votes.length > 0){
-			for(var v = 0; v < votes.length; v++){
-				createUserClosedLawNotification(lawId, lawTitle, votes[v]);
-				closeLaw(lawId);
+		 	
+			var votes = lawsNoClosed[i].councilorVotes;
+
+			if(votes != undefined && votes.length > 0){
+				for(var v = 0; v < votes.length; v++){
+					createUserClosedLawNotification(lawId, lawTitle, votes[v]);
+					closeLaw(lawId);
+				}
 			}
-		}
-	}
+		//}
 
 
 	}
 }
 
 function createUserClosedLawNotification(lawId, lawTitle, vote){
+	
+
 	var  councilorId = vote.councilorId;
 
 	var options = { lawId: lawId,
@@ -77,3 +81,4 @@ function closeLaw(lawId){
 	
 	Meteor.call('closeLaw', options);
 }
+

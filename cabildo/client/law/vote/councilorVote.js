@@ -1,6 +1,7 @@
 Template.councilorVote.rendered = function(){
 	Deps.autorun(function(){
 		Meteor.subscribe("laws");
+		Meteor.subscribe("cabildoUsers");
 	})
 }
 
@@ -18,6 +19,7 @@ Template.councilorVote.events({
 						hasOldVote: hasOldVote};
 
 		Meteor.call('addCouncilorVote', options);
+
 
 		if(!hasOldVote && this.state == LAW_STATE_IN_PROGRESS){
 			if(hasToNotify(this.votesQuantity + 1)){
@@ -135,11 +137,14 @@ function makeVotesNotifications(lawId, followers, lawTitle, notificationType, vo
 				continue;
 			}
 
+			var notificationsQuantity = getUserNotificationsQuantity(followers[i].follower);
+
 			var options = { lawId: lawId,
 							follower: followers[i].follower,
 							lawTitle: lawTitle,
 							type: notificationType,
-							votesQuantity: votesQuantity }
+							votesQuantity: votesQuantity,
+							counter: notificationsQuantity }
 
 			Meteor.call('addUserVoteNotification', options);
 		}
@@ -165,4 +170,20 @@ function hasToNotify(votesQuantity){
 		}
 	} 
 	return false;
+}
+
+function getUserNotificationsQuantity(councilorId){
+	
+	var notificationsQuantity = 0;
+	var cabildoUser = CabildoUsers.findOne({_id: councilorId});
+	var notifications = cabildoUser.notifications;
+	
+	if(notifications == undefined || notifications.length == 0){
+		notificationsQuantity = 1
+	}
+	else{
+		notificationsQuantity = notifications.length + 1;
+	}
+
+	return notificationsQuantity;
 }

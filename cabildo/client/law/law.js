@@ -1,6 +1,7 @@
 Template.law.rendered = function(){
 	Deps.autorun(function(){
         Meteor.subscribe("laws");
+        Meteor.subscribe("cabildoUsers");
 	})
 
 	
@@ -26,6 +27,26 @@ Template.law.isFollower = function(){
 			return true;
 		}
 	}
+	return false;
+}
+
+Template.law.isOwnerLaw = function(){
+	var owner = this.owner;
+
+	if(owner === Meteor.userId()){
+		return true;
+	}
+
+	return false;
+}
+
+Template.law.isCongressLaw = function(){
+	var type = this.type;
+
+	if(type == LAW_TYPE_CONGRESS){
+		return true;
+	}
+
 	return false;
 }
 
@@ -60,20 +81,19 @@ Template.law.events({
 })
 
 function closeNotificationDialog(){
-	var notificationsDialog = $( "#notificationsDialog" );
-	if(notificationsDialog != undefined){
-		notificationsDialog.dialog('close');	
-	}
+	
 }
 
 function createUserClosedLawNotification(lawId, lawTitle, vote){
 	var  councilorId = vote.councilorId;
+	var notificationsQuantity = getUserNotificationsQuantity(councilorId);
 
 	var options = { lawId: lawId,
 					lawTitle: lawTitle,
 					councilorId: councilorId, 
                     state: 1,
-                    type: 3
+                    type: 3,
+                    counter: notificationsQuantity
                   }
       
     Meteor.call('addUserNofication', options);
@@ -84,4 +104,20 @@ function closeLaw(lawId){
 	var options = { lawId: lawId}
 	
 	Meteor.call('closeLaw', options);
+}
+
+function getUserNotificationsQuantity(councilorId){
+	
+	var notificationsQuantity = 0;
+	var cabildoUser = CabildoUsers.findOne({_id: councilorId});
+	var notifications = cabildoUser.notifications;
+	
+	if(notifications == undefined || notifications.length == 0){
+		notificationsQuantity = 1
+	}
+	else{
+		notificationsQuantity = notifications.length + 1;
+	}
+
+	return notificationsQuantity;
 }

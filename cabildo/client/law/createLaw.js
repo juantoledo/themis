@@ -47,6 +47,12 @@ Template.createLaw.events({
     if(!validNotEmptyField(lawContent)) errorMessage = errorMessage + '<br />El campo contenido de ley es requerido';   
     if(!validNotEmptyField(dateClose)) errorMessage = errorMessage + '<br />El campo fecha de término votación es requerido';   
     if(!validNotEmptyField(userName)) errorMessage = errorMessage + '<br />El usuario debe encontrarse registrado en cabildo';    
+    if(validNotEmptyField(dateClose)){
+      if(!isValidDate(dateClose)){
+        errorMessage = errorMessage + '<br />El campo fecha de término votación no tiene un formato válido';   
+      }
+    }
+
   
     if(errorMessage.length > 0){
       Session.set('createLawFailMessage', errorMessage);
@@ -75,3 +81,102 @@ Template.createLaw.events({
   }
 
 })
+
+function isValidDate(dateClosed){
+  var dateSeparated = dateClosed.split('/');
+
+
+  if(!validLength(dateSeparated)){
+    return false;
+  }
+
+
+
+  if(isAfterCurrentDate(dateSeparated)){
+    return true;
+  }
+  else{
+    return false;
+  }
+
+}
+
+function validLength(date){
+  return  (date.length == 3) ? true : false;
+}
+
+function isAfterCurrentDate(dateSeparated){
+  var inputDay = dateSeparated[0];
+  var inputMonth = dateSeparated[1];
+  var inputYear = dateSeparated[2];
+
+  if(!$.isNumeric(inputDay) || !$.isNumeric(inputMonth) || !$.isNumeric(inputYear)){
+    return false;
+  }
+
+  if(!isValidDay(inputDay)){
+    return false;
+  }
+  if(!isValidMonth(inputMonth)){
+    return false;
+  }
+  if(!isValidYear(inputYear)){
+    return false;
+  }
+
+  var date = new Date();
+  var currentDay = date.getDate();
+  var currentMonth = date.getMonth() + 1;
+  var currentYear = date.getFullYear();
+
+  if(currentYear > inputYear)
+  {
+    return false;
+  }
+  else if(currentYear < inputYear)
+  {
+    return true;
+  }
+  else
+  {
+    if(currentMonth > inputMonth)
+    {
+      return false;
+    }
+    else if(currentMonth < inputMonth)
+    {
+      return true;
+    }
+    else{
+      if(currentDay >= inputDay){
+        return false;
+      }
+      else{
+        return true;
+      }
+    }
+  }
+
+
+}
+
+function isValidDay(day){
+  if(day > 0 && day < 32){
+    return true;
+  }
+  return false;
+}
+
+function isValidMonth(month){
+  if(month > 0 && month < 13){
+    return true;
+  }
+  return false;
+}
+
+function isValidYear(year){
+  if(year > 0 && year < 10000){
+    return true;
+  }
+  return false;
+}

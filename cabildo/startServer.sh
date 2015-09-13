@@ -16,5 +16,7 @@ meteor add mizzao:jquery-ui
 meteor add mizzao:autocomplete
 meteor add momentjs:moment
 
+meteor add mizzao:bootboxjs
+
 
 meteor 

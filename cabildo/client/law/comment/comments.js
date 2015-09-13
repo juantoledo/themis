@@ -1,7 +1,7 @@
 Template.comments.rendered = function(){
 	Deps.autorun(function(){
 		Meteor.subscribe("comments");
-		
+		Meteor.subscribe("cabildoUsers");
 	})
 }
 
@@ -74,10 +74,13 @@ function makeFollowerNotifications(lawId, followers, lawTitle, notificationType)
 				continue;
 			}
 
+			var notificationsQuantity = getUserNotificationsQuantity(followers[i].follower);
+
 			var options = { lawId: lawId,
 							follower: followers[i].follower,
 							lawTitle: lawTitle,
-							type: notificationType}
+							type: notificationType,
+							counter: notificationsQuantity + 1}
 
 			Meteor.call('addUserCommentNotification', options);
 		}
@@ -94,4 +97,20 @@ function getTypeNotification(lawType){
 	}
 
 	return notificationType;
+}
+
+function getUserNotificationsQuantity(councilorId){
+	
+	var notificationsQuantity = 0;
+	var cabildoUser = CabildoUsers.findOne({_id: councilorId});
+	var notifications = cabildoUser.notifications;
+	
+	if(notifications == undefined || notifications.length == 0){
+		notificationsQuantity = 1
+	}
+	else{
+		notificationsQuantity = notifications.length + 1;
+	}
+
+	return notificationsQuantity;
 }

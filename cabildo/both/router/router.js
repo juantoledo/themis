@@ -46,6 +46,10 @@ Router.route('/deputies', function () {
   this.render('deputies'); 
 });
 
+Router.route('/congressLaws', function () {
+  this.render('congressLaws'); 
+});
+
 Router.map(function(){
 	this.route('law', {
 		path:'/law:_id',
@@ -53,6 +57,15 @@ Router.map(function(){
 			return Laws.findOne({_id:this.params._id});
 		}
 	})
+});
+
+Router.map(function(){
+  this.route('congressLawDetail', {
+    path:'/congressLawDetail:_id',
+    data:function(){
+      return Laws.findOne({_id:this.params._id});
+    }
+  })
 });
 
 Router.map(function(){
