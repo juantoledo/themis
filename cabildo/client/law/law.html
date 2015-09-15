@@ -17,9 +17,32 @@
 				{{/if}}
 			{{/if}}
 		</p>
+		
 		<div class="row law-box">
 			<div class="col-md-8">
+
+				Estado: {{lawState}}
+				    <br />	 
+
+				{{#if isCongressLaw}}
+					Link oficial: <a href="{{link}}" target="_blank">ver aquí</a>
+					<br />
+					Legislatura: {{legislature}}
+				    <br />	 
+				    Fecha de Ingreso: {{dateAdmision}}
+				    <br />	 			
+					Número de boletín: {{bulletin}}
+				    <br />	 
+				    Materia: {{matter}}
+				    <br />	 
+				    Iniciativa: {{initiative}}
+				    <br />	 
+					Cámara de origen: {{chamberOrigin}}
+				    <br />	
+				{{/if}}
 				
+				<br />
+				Contenido Ley: 
 				<textarea rows="4" cols="100" name="lawContent" id="lawContent" value="{{lawContent}}" style="width: auto; height: auto;" class="input-xxlarg lawContent" readonly="true"></textarea>
                  {{createLawIdSession}}
 				

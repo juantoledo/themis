@@ -60,15 +60,6 @@ Router.map(function(){
 });
 
 Router.map(function(){
-  this.route('congressLawDetail', {
-    path:'/congressLawDetail:_id',
-    data:function(){
-      return Laws.findOne({_id:this.params._id});
-    }
-  })
-});
-
-Router.map(function(){
   this.route('lawFromNotifications', {
     path:'/law:lawId',
     data:function(){

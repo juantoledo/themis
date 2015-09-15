@@ -14,39 +14,30 @@ Template.congressVote.events({
 		var typeVote = 1;
 		var lawId = template.data._id;
 		var deputyId = this._id;
+		var deputyName = this.name;
 		
-		var options = {	lawId:lawId,
-						deputyId: deputyId,
-						typeVote:typeVote
-						};
-
-		Meteor.call('addCongressVote', options);
+		addCongressVote(lawId, deputyId, typeVote, deputyName);
+		addDeputyVote(lawId, deputyId, typeVote, template.data.lawTitle);
 	},
 
 	"click .fingerDown": function (event, template) {
 		var typeVote = 2;
 		var lawId = template.data._id;
 		var deputyId = this._id;
+		var deputyName = this.name;
 		
-		var options = {	lawId:lawId,
-						deputyId: deputyId,
-						typeVote:typeVote
-						};
-
-		Meteor.call('addCongressVote', options);
+		addCongressVote(lawId, deputyId, typeVote, deputyName);
+		addDeputyVote(lawId, deputyId, typeVote, template.data.lawTitle);
 	},
 
 	"click .fingerAbstention": function (event, template) {
 		var typeVote = 0;
 		var lawId = template.data._id;
 		var deputyId = this._id;
+		var deputyName = this.name;
 		
-		var options = {	lawId:lawId,
-						deputyId: deputyId,
-						typeVote:typeVote
-						};
-
-		Meteor.call('addCongressVote', options);
+		addCongressVote(lawId, deputyId, typeVote, deputyName);
+		addDeputyVote(lawId, deputyId, typeVote, template.data.lawTitle);
 	}
 });
 
@@ -54,9 +45,10 @@ Template.congressVote.helpers({
 
 	fingerUpText: function () {
 		var deputyId = this._id;
+		var name = this.name;
 		var lawId = Session.get('currentLawId');
 		
-		var numberVotesLawUser = Laws.find({_id:lawId, "congressVotes":{"type":1, "deputyId": deputyId}}).count();
+		var numberVotesLawUser = Laws.find({_id:lawId, "congressVotes":{"type":1, "deputyId": deputyId, "deputyName": name}}).count();
 
 		if(numberVotesLawUser >= 1){
 			return "++1";
@@ -75,9 +67,10 @@ Template.congressVote.helpers({
 
 	fingerDownText: function () {
 		var deputyId = this._id;
+		var name = this.name;
 		var lawId = Session.get('currentLawId');
 
-		var numberVotesLawUser = Laws.find({_id:lawId, "congressVotes":{"type":2, "deputyId": deputyId}}).count();
+		var numberVotesLawUser = Laws.find({_id:lawId, "congressVotes":{"type":2, "deputyId": deputyId, "deputyName": name}}).count();
 
 		if(numberVotesLawUser >= 1){
 			return "--1";
@@ -95,9 +88,10 @@ Template.congressVote.helpers({
 
 	fingerAbstention: function () {
 		var deputyId = this._id;
+		var name = this.name;
 		var lawId = Session.get('currentLawId');
 
-		var numberVotesLawUser = Laws.find({_id:lawId, "congressVotes":{"type":0, "deputyId": deputyId}}).count();
+		var numberVotesLawUser = Laws.find({_id:lawId, "congressVotes":{"type":0, "deputyId": deputyId, "deputyName": name}}).count();
 
 		if(numberVotesLawUser >= 1){
 			return "No votó";
@@ -115,15 +109,37 @@ Template.congressVote.helpers({
 
 });
 
-function countVotes(law, type){
-		var count = 0;
-		if(law != undefined && law.congressVotes != undefined){
-			for(var i = 0; i < law.congressVotes.length; i++) {
-			  if(law.congressVotes[i].type == type){
-			  	count = count + 1;
-			  }
+function addDeputyVote(lawId, deputyId, typeVote, lawTitle){
+	var options = {	
+			lawId:lawId,
+			deputyId: deputyId,
+			typeVote: typeVote,
+			lawTitle: lawTitle
+		};
 
-			}
+	Meteor.call('addDeputyVote', options);
+}
+
+function addCongressVote(lawId, deputyId, typeVote, deputyName){
+	var options = {	
+			lawId:lawId,
+			deputyId: deputyId,
+			typeVote:typeVote,
+			deputyName: deputyName
+		};
+
+	Meteor.call('addCongressVote', options);
+}
+
+function countVotes(law, type){
+	var count = 0;
+
+	if(law != undefined && law.congressVotes != undefined){
+		for(var i = 0; i < law.congressVotes.length; i++) {
+		  if(law.congressVotes[i].type == type){
+		  	count = count + 1;
+		  }
 		}
-		return count;
 	}
+	return count;
+}

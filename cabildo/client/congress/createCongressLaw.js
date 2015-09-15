@@ -35,9 +35,9 @@ Template.createCongressLaw.events({
     var lawContent = tmpl.find('#lawContent').value;
     var userName = getUserName(Meteor.user());
     var categoriesSelected = Session.get('categoriesSelected');
+    var link = tmpl.find('#link').value;
     var lawLegislature = tmpl.find('#lawLegislature').value;
     var lawDateAdmision = tmpl.find('#lawDateAdmision').value;
-    var lawState = tmpl.find('#lawState').value;
     var lawBulletinNumber = tmpl.find('#lawBulletinNumber').value;
     var lawMatter = tmpl.find('#lawMatter').value;
     var lawInitiative = tmpl.find('#lawInitiative').value;
@@ -46,9 +46,9 @@ Template.createCongressLaw.events({
     if(!validNotEmptyField(lawTitle)) errorMessage = errorMessage + '<br />El campo título de ley es requerido';  
     if(!validNotEmptyField(lawContent)) errorMessage = errorMessage + '<br />El campo contenido de ley es requerido';   
     if(!validNotEmptyField(userName)) errorMessage = errorMessage + '<br />El usuario debe encontrarse registrado en cabildo';    
+    if(!validNotEmptyField(link)) errorMessage = errorMessage + '<br />El link oficial es requerido';    
     if(!validNotEmptyField(lawLegislature)) errorMessage = errorMessage + '<br />El número de legislatura es requerido';    
     if(!validNotEmptyField(lawDateAdmision)) errorMessage = errorMessage + '<br />La fecha de ingreso es requerida';    
-    if(!validNotEmptyField(lawState)) errorMessage = errorMessage + '<br />El estado de la ley es requerido';    
     if(!validNotEmptyField(lawBulletinNumber)) errorMessage = errorMessage + '<br />El número de boletín es requerido';    
     if(!validNotEmptyField(lawMatter)) errorMessage = errorMessage + '<br />La materia de la ley es requerida';    
     if(!validNotEmptyField(lawInitiative)) errorMessage = errorMessage + '<br />El tipo de iniciativa es requerida';    
@@ -66,11 +66,11 @@ Template.createCongressLaw.events({
                     createdBy: userName,
                     lawLegislature: lawLegislature,
                     lawDateAdmision: lawDateAdmision,
-                    lawState: lawState,
                     lawBulletinNumber: lawBulletinNumber,
                     lawMatter: lawMatter,
                     lawInitiative: lawInitiative,
-                    lawChamberOrigin: lawChamberOrigin};
+                    lawChamberOrigin: lawChamberOrigin,
+                    link: link};
       
     Meteor.call('addCongressLaw', options);
 
@@ -81,7 +81,6 @@ Template.createCongressLaw.events({
     $('#lawContent').val('');
     $('#lawLegislature').val('');
     $('#lawDateAdmision').val('');
-    $('#lawState').val('');
     $('#lawBulletinNumber').val('');
     $('#lawMatter').val('');
     $('#lawInitiative').val('');

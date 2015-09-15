@@ -11,7 +11,8 @@ Meteor.methods({
 		Laws.update(options.lawId, { $push: { 
 			congressVotes: {
 				type: options.typeVote,			
-				deputyId: options.deputyId
+				deputyId: options.deputyId,
+				deputyName: options.deputyName
 			}
 		}});
 
@@ -111,6 +112,25 @@ Meteor.methods({
 		});
 
 	
-	}		
+	},
+
+	'addDeputyVote':function(options){
+	
+		Deputies.update(options.deputyId, { $pull: { 
+			votes: {			
+				lawId: options.lawId
+			}
+		}});
+
+		Deputies.update(options.deputyId, { $push: { 
+			votes: {
+				type: options.typeVote,			
+				lawId: options.lawId,
+				lawTitle: options.lawTitle
+			}
+		}});
+
+	
+	}
 	
 })

@@ -8,6 +8,10 @@ Template.law.rendered = function(){
 
 }
 
+Template.law.lawState = function(){
+	return getLawState(this.state);
+}
+
 Template.law.createLawIdSession = function(){
 
 	closeNotificationDialog();

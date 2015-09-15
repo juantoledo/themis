@@ -21,8 +21,33 @@
 					<br />
 			    	Correo electrónico:  {{email}}
 			    	<br />        	
+			    	<br />      
+			    	<br />      
 			    </div>
+
 			</div>
+
+		</div>
+
+		<div class="row user-laws">
+			{{#each votes}}
+				<div class="col-md-4">
+					<div class="user-laws-item">
+						<h3><a href="{{pathFor 'lawFromNotifications'}}">{{lawTitle}}</a></h3>
+						<div class="span1 ">
+							<a class="fingerUp muted">
+								<img width="20px" src="{{photobyType}}" class="media-object" data-src="holder.js/64x64"/>
+							</a>
+						</div>
+				
+						<div class="span1 ">
+							<p>{{typeVote}}</p>
+						</div>
+						
+					</div>
+				</div>
+			{{/each}}
+				
 		</div>
 	</div>
 
