@@ -81,11 +81,12 @@
 				{{ >congressVote}}
 		   		<button id="closeCongressLaw">Cerrar la ley</button>
 		   	{{/if}}
-	  					
-	  	{{/if}}
-	  	
-
-  		
-
+	  	{{else}}				
+	  		{{#if isCongressLaw}}
+				{{#if isClosed}}
+					{{ >reviewCongressVote}}
+	  			{{/if}}
+	  		{{/if}}
+		{{/if}}
 	</div>
 </template>

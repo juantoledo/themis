@@ -1,0 +1,29 @@
+<template name="reviewCongressVote">
+   
+    <br>
+	<div>
+		<h2>Votación de diputados</h2>
+		{{#each congressVotes}}
+			
+		    <div class="col-md-4">
+					<div class="user-laws-item">
+						
+						<div class="span1 ">
+							<a class="pull-left" href="#">
+								<img width="50px" src="deputies/{{deputyId}}.jpeg" class="media-object" data-src="holder.js/64x64"/>
+							</a>
+						</div>
+
+						<div>
+							<h4>Nombre: <a href="{{pathFor 'deputy'}}">{{deputyName}}</a></h4> 			
+					    </div>
+					
+						<div class="span1">
+							<p>{{typeVote}}</p>
+						</div>
+						
+					</div>
+				</div>
+	    {{/each}}
+	</div>
+</template>

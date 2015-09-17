@@ -54,6 +54,13 @@ Template.law.isCongressLaw = function(){
 	return false;
 }
 
+Template.law.isClosed = function(){
+	if(this.state == LAW_STATE_CLOSED){
+		return true;
+	}
+	return false;
+}
+
 Template.law.events({
 
 	'click #closeCongressLaw':function(evt, tmpl){
