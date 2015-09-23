@@ -1,8 +1,7 @@
 #!/bin/bash
 
-
-
-meteor add bootstrap
+#meteor add bootstrap
+meteor add mizzao:bootstrap-3
 meteor add jquery
 meteor add iron:router
 meteor add accounts-ui accounts-password 
