@@ -79,6 +79,16 @@ Router.map(function(){
 }); 
 
 Router.map(function(){
+  this.route('deputyVote', {
+    path:'/deputy:deputyId',
+    data:function(){
+      depus = Deputies.findOne({_id:this.params.deputyId});
+      return depus;
+    }
+  })
+}); 
+
+Router.map(function(){
   this.route('userPerfil', {
     path:'/userPerfil:owner',
     waitOn: function() {

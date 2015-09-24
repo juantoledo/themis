@@ -80,29 +80,33 @@
 			</div>
 		</div>
 	</nav>
- 				<div id="user-notifications" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				 	 <div class="modal-header">
-						<button id="modalButton" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h3 id="myModalLabel">Notificaciones {{userName}}</h3>
-					</div>
-					 <div class="modal-body">
-					 	
-						
-						{{#each userNotifications}}
-							<div id="lawFromNotificationView">
-								<a id="lawFromNotificationView2">
-									{{lawTitle}}
-									<br />
-									{{messageType}}
-									{{#if isView}}
-										(vista)
-									{{else}}
-										(no vista)
-									{{/if}}
-									{{counter}}
-								</a>
+ 		<div id="user-notifications" class="modal fade" role="dialog">
+	 				<div class="modal-dialog">
+	 					<div class="modal-content">
+						 	<div class="modal-header">
+								<button id="modalButton" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<h3 id="myModalLabel">Notificaciones {{userName}}</h3>
 							</div>
-						{{/each}}
-					</div>
+
+							<div class="modal-body">			 	
+								
+								{{#each userNotifications}}
+									<div id="lawFromNotificationView">
+										<a id="lawFromNotificationView2">
+											{{lawTitle}}
+											<br />
+											{{messageType}}
+											{{#if isView}}
+												(vista)
+											{{else}}
+												(no vista)
+											{{/if}}
+											{{counter}}
+										</a>
+									</div>
+								{{/each}}
+							</div>
+						</div>
+					</div>	
 				</div>
 </template>
