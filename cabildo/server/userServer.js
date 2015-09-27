@@ -44,6 +44,14 @@ Meteor.methods({
             notifications: []
         }
         CabildoUsers.insert(cabildoUser);
+        
+        Meteor.call('sendEmail',
+            options.userMail,
+            'cabildouser@gmail.com',
+            'Bienvenido a Cabildo '+ options.userName +' (o como se vaya a llamar)',
+            'Esto tiene que ser un template html <h1>bonito</h1>.');
+      
+        
 	},
 
     'addAdminUser':function(options){
@@ -70,6 +78,11 @@ Meteor.methods({
         }
         CabildoUsers.insert(cabildoUser);
 
+        Meteor.call('sendEmail',
+            options.userMail,
+            'cabildouser@gmail.com',
+            'Bienvenido a Cabildo Admin '+ options.userName +' (o como se vaya a llamar)',
+            'Esto tiene que ser un template html <h1>bonito</h1>.');
 
     }
 			
