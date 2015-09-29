@@ -20,7 +20,7 @@
 			
 			<div id="lawCategoriesPlace"> {{{lawCategories}}}</div>
 			{{#if isInRole 'councilor-user,admin-user'}}
-    			{{ >councilorVote}}
+    			{{ >councilorVoteBlocked}}
     		{{else}}
     			Registrate para votar
   			{{/if}}

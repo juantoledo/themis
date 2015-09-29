@@ -7,8 +7,7 @@
 		<h2>{{lawTitle}}</h2>
 		<p class="law-data">
 			<span class="author">Autor:  <a href="{{pathFor 'userPerfil'}}">{{createdBy}}</a></span>
-			<span class="colaborator">Seguidores: <em>12</em></span>
-			<span class="opinions">Visitas: <em>65.984</em></span>
+			<span class="colaborator">Seguidores: <em>{{followersCount}}</em></span>
 			{{#if isInRole 'councilor-user,admin-user'}}
 				{{#if isFollower}}
 					<button id="unFollowLaw">Dejar de seguir ley</button>

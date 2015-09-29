@@ -34,6 +34,16 @@ Template.law.isFollower = function(){
 	return false;
 }
 
+Template.law.followersCount = function(){
+	var followers = this.followers;
+
+	if(followers == undefined){
+		return 0;
+	}
+
+	return followers.length;
+}
+
 Template.law.isOwnerLaw = function(){
 	var owner = this.owner;
 
