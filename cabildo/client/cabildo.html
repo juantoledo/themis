@@ -22,29 +22,64 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="listas-box">
-					<h3>Recientes</h3>
+					<h3>Recientes creadas por usuarios</h3>
 					<ul>
 						{{ >recentLaws}}
 					</ul>
 				</div>
 
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="listas-box">
-					<h3>Más Votados</h3>
+					<h3>Recientes creadas por congreso</h3>
+					<ul>
+						{{ >recentCongressLaws}}
+					</ul>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row">
+			
+			<div class="col-md-6">
+				<div class="listas-box">
+					<h3>Más Votadas creadas por usuarios</h3>
 					<ul>
 						{{ >moreVotedLaws}}
 					</ul>
 				</div>
 
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<div class="listas-box">
-					<h3>Más Comentados</h3>
+					<h3>Más Votados creadas por congreso</h3>
+					<ul>
+						{{ >moreVotedCongressLaws}}
+					</ul>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row">
+			
+			<div class="col-md-6">
+				<div class="listas-box">
+					<h3>Más Comentados creadas por usuarios</h3>
 					<ul>
 						{{ >moreCommentedLaws}}
+					</ul>
+				</div>
+
+			</div>
+			<div class="col-md-6">
+				<div class="listas-box">
+					<h3>Más Comentados creadas por congreso</h3>
+					<ul>
+						{{ >moreCommentedCongressLaws}}
 					</ul>
 				</div>
 
@@ -77,8 +112,23 @@
 </template>
 
 
+<template name="recentCongressLaws">
 
+	{{#each recentCongressLaws}}
+		<li><a href="{{pathFor 'law'}}">{{lawTitle}}</a></li>
+	{{/each}}
+</template>
 
+<template name="moreVotedCongressLaws">
 
+	{{#each moreVotedCongressLaws}}		
+		<li><a href="{{pathFor 'law'}}">{{lawTitle}}</a></li>
+	{{/each}}
+</template>
 
+<template name="moreCommentedCongressLaws">
 
+	{{#each moreCommentedCongressLaws}}
+		<li><a href="{{pathFor 'law'}}">{{lawTitle}}</a></li>
+	{{/each}}
+</template>
