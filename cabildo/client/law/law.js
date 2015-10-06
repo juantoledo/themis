@@ -12,6 +12,10 @@ Template.law.lawState = function(){
 	return getLawState(this.state);
 }
 
+Template.law.congressLawTypeName = function(){
+	return getCongressLawType(this.congressType);
+}
+
 Template.law.createLawIdSession = function(){
 
 	closeNotificationDialog();

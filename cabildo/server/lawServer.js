@@ -48,6 +48,7 @@ Meteor.methods({
             matter: options.lawMatter,
             initiative: options.lawInitiative,
             chamberOrigin: options.lawChamberOrigin,
+            congressType: options.lawCongressType,
             date: new Date(),
             votesQuantity: 0,
 			votesInFavor: 0,

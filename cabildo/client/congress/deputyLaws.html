@@ -1,0 +1,14 @@
+<template name="deputyLaws">
+	{{> header}}
+
+	<div class="container">
+		<h3>Leyes de diputados</h3>
+		<div class="row user-laws">
+
+			{{#each deputyLaws}}
+				{{ >congressLawReview}}
+			{{/each}}
+			
+		</div>
+	</div>
+</template>

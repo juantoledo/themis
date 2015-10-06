@@ -8,6 +8,11 @@ Template.deputy.typeVote = function(){
 	return retrieveTypeVoteDescription(this.type);
 }
 
+Template.deputy.isDeputy = function(){
+	return CONGRESSMAN_DEPUTY == this.type;
+}
+
+
 Template.deputy.photobyType = function(){
 	return "finger_up.png";
 	//finger_up.png finger_down.png abstention.png

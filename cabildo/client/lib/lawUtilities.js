@@ -7,3 +7,13 @@ getLawState = function(lawStateCode){
   }
   return "Estado de ley no determinado"
 }
+
+getCongressLawType = function(congressLawType){
+  if(congressLawType == LAW_TYPE_CONGRESS_DEPUTY){
+    return "Camara de diputados";
+  }
+  else if(congressLawType == LAW_TYPE_CONGRESS_SENATOR){
+  	return "Senadores";
+  }
+  return "Tipo de ley de congreso no determinado"
+}

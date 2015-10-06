@@ -1,0 +1,14 @@
+<template name="senateLaws">
+	{{> header}}
+
+	<div class="container">
+		<h3>Leyes de senadores</h3>
+		<div class="row user-laws">
+
+			{{#each senateLaws}}
+				{{ >congressLawReview}}
+			{{/each}}
+			
+		</div>
+	</div>
+</template>

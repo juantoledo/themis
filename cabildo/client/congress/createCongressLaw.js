@@ -42,6 +42,7 @@ Template.createCongressLaw.events({
     var lawMatter = tmpl.find('#lawMatter').value;
     var lawInitiative = tmpl.find('#lawInitiative').value;
     var lawChamberOrigin = tmpl.find('#lawChamberOrigin').value;
+    var lawCongressType = tmpl.find('#lawCongressType').value;
 
     if(!validNotEmptyField(lawTitle)) errorMessage = errorMessage + '<br />El campo título de ley es requerido';  
     if(!validNotEmptyField(lawContent)) errorMessage = errorMessage + '<br />El campo contenido de ley es requerido';   
@@ -70,7 +71,8 @@ Template.createCongressLaw.events({
                     lawMatter: lawMatter,
                     lawInitiative: lawInitiative,
                     lawChamberOrigin: lawChamberOrigin,
-                    link: link};
+                    link: link,
+                    lawCongressType: lawCongressType};
       
     Meteor.call('addCongressLaw', options);
 
@@ -85,6 +87,8 @@ Template.createCongressLaw.events({
     $('#lawMatter').val('');
     $('#lawInitiative').val('');
     $('#lawChamberOrigin').val('');
+    $('#link').val('');
+    $('#lawCongressType').val('1');
 
     Session.set('categoriesSelected', []);  
     $( "#categoriesPlace" ).empty();

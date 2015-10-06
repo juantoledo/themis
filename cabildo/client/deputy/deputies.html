@@ -27,3 +27,34 @@
 	    {{/each}}
 	</div>
 </template>
+
+
+<template name="senators">
+    <br>
+    <br>
+    <br>
+    <br>
+	<div class="container">
+		<h2>Senadores de Chile</h2>
+		{{#each senators}}
+			
+
+		    <div class="media">         
+				<a class="pull-left" href="#">
+					<img width="60px" src="deputies/{{_id}}.jpeg" class="media-object" data-src="holder.js/64x64"/>
+				</a>
+
+				<div class="media-body">
+
+					<div>
+						<h3>nombre: <a href="{{pathFor 'deputy'}}">{{name}}</a></h3> 
+				   		<br /> 
+				       	partido: {{party}} 		   
+				    </div>
+				    <br /> 
+				</div>
+			</div>
+
+	    {{/each}}
+	</div>
+</template>

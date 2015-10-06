@@ -46,8 +46,16 @@ Router.route('/deputies', function () {
   this.render('deputies'); 
 });
 
-Router.route('/congressLaws', function () {
-  this.render('congressLaws'); 
+Router.route('/senators', function () {
+  this.render('senators'); 
+});
+
+Router.route('/deputyLaws', function () {
+  this.render('deputyLaws'); 
+});
+
+Router.route('/senateLaws', function () {
+  this.render('senateLaws'); 
 });
 
 Router.map(function(){

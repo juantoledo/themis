@@ -11,7 +11,13 @@
 
 			<div class="media-body">
 
-				<h2>Diputado: {{name}}</h2>
+				{{#if isDeputy}}
+					<h2>Diputado: {{name}}</h2>
+				
+				{{else}}
+					<h2>Senador: {{name}}</h2>
+				{{/if}}
+
 				<div>
 					Pardido: {{party}}
 					<br />
