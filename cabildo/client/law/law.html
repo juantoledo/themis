@@ -56,7 +56,17 @@
 						<a href="#">pinterest</a>
 
 					</p>
+
 				</div>
+				
+				<div class="law-creators">
+					{{#each creators}}
+						<div class="law-creator">
+							 <a id="deputyFromCreators" href="{{pathFor 'deputy'}}">{{name}} </a> 
+						</div>
+					{{/each}}
+				</div>
+				
 			</div>
 		</div>
 		<div class="row law-box">

@@ -14,25 +14,46 @@
 				<div class="media-body">
 
 					<div>
-						<h4>nombre: <a href="{{pathFor 'deputy'}}">{{name}}</a></h4> 			
+						<h4>nombre: <a href="{{pathFor 'deputy'}}">{{name}} </a> 
+							{{#if isCreator}}
+								<button id="noCreatorLaw">Indicar que NO es creador de esta ley</button>	
+							{{else}}
+								<button id="creatorLaw">Indicar que es creador de esta ley</button>	
+							{{/if}}
+						</h4> 		
+						 
 				    </div>
+				   
 				    <br /> 
-				    <a class="fingerUp muted">
-						<img width="20px" src="finger_up.png" class="media-object" data-src="holder.js/64x64"/>
-						<p>{{totalFingerUp}}</p>
-						<p>{{fingerUpText}}</p>
-
-					</a>
-					<a class="fingerDown muted">
-						<img width="30px" src="finger_down.png" class="media-object" data-src="holder.js/64x64"/>
-						<p>{{totalFingerDown}}</p>
-						<p>{{fingerDownText}}</p>
-					</a>
-					<a class="fingerAbstention muted">
-						<img width="30px" src="abstention.png" class="media-object" data-src="holder.js/64x64"/>
-						<p>{{totalAbstention}}</p>
-						<p>{{fingerAbstention}}</p>
-					</a>
+				    <div class="row">
+				    	<div class="col-md-2">
+						    <a class="fingerUp muted">
+								<img width="20px" src="finger_up.png" class="media-object" data-src="holder.js/64x64"/>
+								<p>{{totalFingerUp}}</p>
+							</a>
+						</div>
+						<div class="col-md-2">
+							<p>{{fingerUpText}}</p>
+						</div>
+						<div class="col-md-2">
+							<a class="fingerDown muted">
+								<img width="30px" src="finger_down.png" class="media-object" data-src="holder.js/64x64"/>
+								<p>{{totalFingerDown}}</p>
+							</a>
+						</div>
+						<div class="col-md-2">
+							<p>{{fingerDownText}}</p>
+						</div>
+						<div class="col-md-2">
+							<a class="fingerAbstention muted">
+								<img width="30px" src="abstention.png" class="media-object" data-src="holder.js/64x64"/>
+								<p>{{totalAbstention}}</p>
+							</a>
+						</div>
+						<div class="col-md-2">
+							<p>{{fingerAbstention}}</p>
+						</div>
+					</div>
 				</div>
 			</div>
 

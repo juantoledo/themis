@@ -101,6 +101,10 @@ Template.law.events({
 		var options = { lawId: lawId}
 
 		Meteor.call('userUnfollowLaw', options);
+	},
+
+	'click #deputyFromCreators': function(evt, tmpl){
+		Router.go('deputy', { _id: this.deputyId });
 	}
 
 })

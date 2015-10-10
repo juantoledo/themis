@@ -14,7 +14,6 @@ Template.deputy.isDeputy = function(){
 
 
 Template.deputy.photobyType = function(){
-	return "finger_up.png";
-	//finger_up.png finger_down.png abstention.png
+	return retrieveTypeVoteImage(this.type);
 }
 

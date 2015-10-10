@@ -9,6 +9,23 @@ Template.congressVote.deputiesVote = function(){
 	return Deputies.find({}, {});
 }
 
+Template.congressVote.isCreator = function(){
+	var creators = this.creators;
+	var lawId = Session.get('currentLawId');
+
+	if(creators == undefined){
+		return false;
+	}
+
+	for(var i = 0; i < creators.length; i++){
+		if(lawId === creators[i].lawId){
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 Template.congressVote.events({
 	"click .fingerUp": function (event, template) {
 		var typeVote = 1;
@@ -38,6 +55,34 @@ Template.congressVote.events({
 		
 		addCongressVote(lawId, deputyId, typeVote, deputyName);
 		addDeputyVote(lawId, deputyId, typeVote, template.data.lawTitle);
+	},
+
+	'click #creatorLaw': function(event, template){
+		var lawId = template.data._id;
+		var lawTitle = template.data.lawTitle;
+		var name = this.name;
+		var congressId = this._id;
+		
+		var options = { lawId: lawId,
+						congressId: congressId,
+						name: name,
+						lawTitle: lawTitle}
+
+		Meteor.call('congressCreatorLaw', options);
+	},
+	
+	'click #noCreatorLaw': function(event, template){
+		var lawId = template.data._id;
+		var lawTitle = template.data.lawTitle;
+		var name = this.name;
+		var congressId = this._id;
+
+		var options = { lawId: lawId,
+						congressId: congressId,
+						name: name,
+						lawTitle: lawTitle}
+
+		Meteor.call('congressNoCreatorLaw', options);
 	}
 });
 

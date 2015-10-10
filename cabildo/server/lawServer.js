@@ -78,6 +78,6 @@ Meteor.methods({
 				follower: Meteor.userId()
 			}
 		}});
-	}	
+	}
 					
 })
