@@ -8,6 +8,30 @@ Template.law.rendered = function(){
 
 }
 
+Template.law.hasFailMessage = function(){
+  if (Session.get('editLawFailMessage') != null)
+    return true;
+  return false;
+}
+
+Template.law.failMessage = function(){
+  return Session.get('editLawFailMessage');
+}
+
+Template.law.hasEditLawPermissions = function(){
+		var owner = this.owner;
+		return Meteor.userId() === owner;
+}
+
+Template.law.isModeEditLaw = function(){
+	var editLaw = false;
+	var currentLawToEdit = Session.get('currentLawToEdit');		
+
+	if(this._id === currentLawToEdit)
+		return true;
+	return false;
+}
+
 Template.law.lawState = function(){
 	return getLawState(this.state);
 }
@@ -105,6 +129,104 @@ Template.law.events({
 
 	'click #deputyFromCreators': function(evt, tmpl){
 		Router.go('deputy', { _id: this.deputyId });
+	},
+
+	'click #editLawButton':function(evt, tmpl){
+		Session.set('currentLawToEdit', this._id);				
+	},
+
+	'click #publishCongressLawButton':function(evt, tmpl){
+		
+		Session.set('editLawFailMessage', null);
+    	var errorMessage = '';
+
+
+   		var lawId = this._id;
+    	var lawContent = tmpl.find('#lawContentEdit').value;
+   		var userName = getUserName(Meteor.user());
+    	var link = tmpl.find('#linkEdit').value;
+    	var lawLegislature = tmpl.find('#lawLegislatureEdit').value;
+    	var lawDateAdmision = tmpl.find('#lawDateAdmisionEdit').value;
+    	var lawBulletinNumber = tmpl.find('#lawBulletinNumberEdit').value;
+    	var lawMatter = tmpl.find('#lawMatterEdit').value;
+    	var lawInitiative = tmpl.find('#lawInitiativeEdit').value;
+    	var lawChamberOrigin = tmpl.find('#lawChamberOriginEdit').value;
+    
+	    if(!validNotEmptyField(lawContent)) errorMessage = errorMessage + '<br />El campo contenido de ley es requerido';   
+	    if(!validNotEmptyField(userName)) errorMessage = errorMessage + '<br />El usuario debe encontrarse registrado en cabildo';    
+    	if(!validNotEmptyField(link)) errorMessage = errorMessage + '<br />El link oficial es requerido';    
+	    if(!validNotEmptyField(lawLegislature)) errorMessage = errorMessage + '<br />El número de legislatura es requerido';    
+	    if(!validNotEmptyField(lawDateAdmision)) errorMessage = errorMessage + '<br />La fecha de ingreso es requerida';    
+	    if(!validNotEmptyField(lawBulletinNumber)) errorMessage = errorMessage + '<br />El número de boletín es requerido';    
+	    if(!validNotEmptyField(lawMatter)) errorMessage = errorMessage + '<br />La materia de la ley es requerida';    
+	    if(!validNotEmptyField(lawInitiative)) errorMessage = errorMessage + '<br />El tipo de iniciativa es requerida';    
+    	if(!validNotEmptyField(lawChamberOrigin)) errorMessage = errorMessage + '<br />La cámara de origen es requerida';    
+    
+	    if(errorMessage.length > 0){
+	      Session.set('editLawFailMessage', errorMessage);
+	      Session.set('editLawSuccessMessage', null);
+	      return false;
+	    }
+
+	    var options = { lawContent: lawContent,	                  
+	                    createdBy: userName,
+	                    lawLegislature: lawLegislature,
+	                    lawDateAdmision: lawDateAdmision,
+	                    lawBulletinNumber: lawBulletinNumber,
+	                    lawMatter: lawMatter,
+	                    lawInitiative: lawInitiative,
+	                    lawChamberOrigin: lawChamberOrigin,
+	                    link: link,
+	                	lawId: lawId};
+      
+    	Meteor.call('editCongressLaw', options);
+
+
+		Session.set('currentLawToEdit', undefined);	
+		Session.set('editLawFailMessage', null);	
+		
+	},
+
+	'click #publishUserLawButton':function(evt, tmpl){
+
+		Session.set('editLawFailMessage', null);
+	    var errorMessage = '';
+
+
+	    var lawContent = tmpl.find('#lawContentEdit').value;
+	    var userName = getUserName(Meteor.user());
+	    var dateClose = tmpl.find('#dateCloseEdit').value;
+
+	    if(!validNotEmptyField(lawContent)) errorMessage = errorMessage + '<br />El campo contenido de ley es requerido';   
+	    if(!validNotEmptyField(dateClose)) errorMessage = errorMessage + '<br />El campo fecha de término votación es requerido';   
+	    if(!validNotEmptyField(userName)) errorMessage = errorMessage + '<br />El usuario debe encontrarse registrado en cabildo';    
+	    if(validNotEmptyField(dateClose)){
+	      if(!isValidDate(dateClose)){
+	        errorMessage = errorMessage + '<br />El campo fecha de término votación no tiene un formato válido';   
+	      }
+	    }
+
+	  
+	    if(errorMessage.length > 0){
+	      Session.set('editLawFailMessage', errorMessage);
+	      Session.set('editLawSuccessMessage', null);
+	      return false;
+	    }
+
+	    var options = { lawContent: lawContent,
+	                    createdBy: userName,
+	                    dateClose: dateClose};
+	      
+	    Meteor.call('editUserLaw', options);
+		
+		Session.set('currentLawToEdit', undefined);	
+		Session.set('editLawFailMessage', null);
+	},
+
+	'click #cancelEditionLawButton':function(evt, tmpl){
+
+		Session.set('currentLawToEdit', undefined);	
+		Session.set('editLawFailMessage', null);
 	}
 
 })

@@ -78,6 +78,32 @@ Meteor.methods({
 				follower: Meteor.userId()
 			}
 		}});
+	},
+
+	'editCongressLaw':function(options){
+	
+		Laws.update(options.lawId, { 
+			$set: { 
+				lawContent: options.lawContent,	                                
+                legislature: options.lawLegislature,
+                dateAdmision: options.lawDateAdmision,
+                bulletin: options.lawBulletinNumber,
+                matter: options.lawMatter,
+                initiative: options.lawInitiative,
+                chamberOrigin: options.lawChamberOrigin,
+                link: options.link                
+			} 
+		});		
+	},
+
+	'editUserLaw':function(options){
+
+		Laws.update(options.lawId, { 
+			$set: { 
+				lawContent: options.lawContent,	                                
+                dateClose: options.dateClose
+			} 
+		});		
 	}
 					
 })
