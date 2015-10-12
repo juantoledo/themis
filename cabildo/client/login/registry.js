@@ -40,7 +40,7 @@ Template.registry.hasFailMessage = function(){
 Template.registry.events({
 	'click #createUser' : function(e, tmpl) {
 	    Session.set('displayFailMessage', null);
-	    var hasEmptyFields = false;
+	   
 	    var errorMessage = '';
 
 	    var userName = tmpl.find('#userName').value;
@@ -107,7 +107,7 @@ Template.registry.events({
 
 	'click #createAdminUser' : function(e, tmpl) {
 	    Session.set('displayFailMessage', null);
-	    var hasEmptyFields = false;
+	    
 	    var errorMessage = '';
 
 	    var userName = tmpl.find('#userName').value;

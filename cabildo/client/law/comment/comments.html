@@ -1,16 +1,24 @@
 <template name="comments">
+	{{#if hasFailMessage}}
+  		<div class="alert" id="invalid_form">{{{failMessage}}}</div>
+  	{{/if}}
 	
-	 <form >
-	 	<textarea rows="4" cols="50" name="newCommentInput" id="newCommentInput" value="" placeholder="Pensando en algo a comentar" style="width: auto; height: auto;" class="input-xxlarg" ></textarea>
-		
-	</form>	
-
-	 <button id="submitCommentLaw">Publicar Comentario</button>
-
 	{{#each comments}}
 		{{>comment}}
 	{{/each}}
 
+	{{#if isInRole 'councilor-user,admin-user'}}
+    	<form id="publish-comment-form">
+	 		<textarea rows="4" cols="50" name="newCommentInput" id="newCommentInput" value="" placeholder="Pensando en algo a comentar" style="width: auto; height: auto;" class="input-xxlarg" ></textarea>
+		
+			 <button id="submitCommentLaw">Publicar Comentario</button>
+
+		</form>	
+
+	
+    {{else}}
+    	Registrate para comentar
+  	{{/if}}
 
 </template>
 
@@ -18,12 +26,14 @@
 
 	<div>
 		{{#if modeEditComment}}
-			<span class="text">
-				<strong>{{createdBy}}</strong>
-				- 
-				<textarea rows="3" cols="50" name="editedComment" id="editedComment" value="{{commentText}}" style="width: auto; height: auto;" class="input-xxlarg lawComment" ></textarea>
-			</span>
-			<button id="publishCommentButton">Publicar Edición</button>
+			<form id="edit-comment-form" action="action">
+				<span class="text">
+					<strong>{{createdBy}}</strong>
+					- 
+					<textarea rows="3" cols="50" name="editedComment" id="editedComment" value="{{commentText}}" style="width: auto; height: auto;" class="input-xxlarg lawComment" ></textarea>
+				</span>
+				<button id="publishCommentButton">Publicar Edición</button>
+			</form>
 			
 		{{else}}
 				

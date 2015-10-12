@@ -4,8 +4,34 @@ Template.law.rendered = function(){
         Meteor.subscribe("cabildoUsers");
 	})
 
-	
+	FB.init({
+      appId      : '1382581492041125',
+      status     : true,
+      xfbml      : true
+    });
 
+}
+
+
+window.fbAsyncInit = function() {
+   FB.init({
+      appId      : '1382581492041125',
+      status     : true,
+      xfbml      : true
+    });
+  };
+
+
+Template.law.config = function(){
+	var config = { 
+		"data-href": "www.face.com"
+	}
+	return config;
+}
+
+Template.law.getLawUrl = function(){
+	
+	return "http://www.votalaley.com/law" + this._id;
 }
 
 Template.law.hasFailMessage = function(){
@@ -100,6 +126,17 @@ Template.law.isClosed = function(){
 }
 
 Template.law.events({
+	'keyup #facebookComment':function(evt,tmpl){ 
+		if(evt.which === 13){
+			var d2 = 3;
+			var fjs = evt.getElementsByTagName(tmpl)[0];
+			FB.ui(
+			 {
+			  method: 'feed'
+			 }
+			);
+		}
+	},
 
 	'click #closeCongressLaw':function(evt, tmpl){
     	var councilorVotes = this.councilorVotes;

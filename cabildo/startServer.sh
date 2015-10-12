@@ -16,6 +16,7 @@ meteor add mizzao:autocomplete
 meteor add momentjs:moment
 
 meteor add mizzao:bootboxjs
-
+#meteor add accounts-facebook
+meteor add mrt:facebook-sdk
 
 meteor 

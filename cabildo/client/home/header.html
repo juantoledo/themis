@@ -4,7 +4,12 @@
 			<div class="header-content">
 				<div class="header-content-inner">
 					{{ >randomLaw}}
-					<a href="createLaw" class="btn btn-primary btn-xl createlaw-btn">Crea tu Ley</a>
+
+					{{#if isInRole 'councilor-user,admin-user'}}
+						<a href="createLaw" class="btn btn-primary btn-xl createlaw-btn">Crea tu Ley</a>
+					{{else}}
+						Registrate para crear una ley
+					{{/if}}
 				</div>
 			</div>
 		</div>

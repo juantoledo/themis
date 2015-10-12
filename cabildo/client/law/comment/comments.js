@@ -24,13 +24,33 @@ Template.comment.modeEditComment = function(){
 	return false;
 }
 
+Template.comments.failMessage = function(){
+  return Session.get('displayFailCommentMessage');
+}
+
+Template.comments.hasFailMessage = function(){
+  if (Session.get('displayFailCommentMessage') != null)
+    return true;
+  return false;
+}
+
+
 Template.comments.events({
 
-	'click #submitCommentLaw':function(evt, tmpl){
-		
+	'click #publish-comment-form':function(evt, tmpl){
+		Session.set('displayFailCommentMessage', null);
+		var errorMessage = '';
+
 		var commentText = tmpl.find('#newCommentInput').value;
 		var lawId = this._id;
-		
+
+		if(!validNotEmptyField(commentText)) errorMessage = errorMessage + '<br />El campo para los comentarios es requerido';		
+
+		if(errorMessage.length > 0){
+	    	Session.set('displayFailCommentMessage', errorMessage);
+	    	return false;
+	    }
+
 		var userName = getUserName(Meteor.user());
 
 		var options = {commentText:commentText, createdBy:userName, lawId:lawId};
@@ -43,6 +63,7 @@ Template.comments.events({
 		if(this.state == LAW_STATE_IN_PROGRESS){
 			makeFollowerNotifications(lawId, this.followers, this.lawTitle, type);
 		}
+		Session.set('displayFailCommentMessage', null);
 	}
 
 })
@@ -54,7 +75,7 @@ Template.comment.events({
 		
 	},
 
-	'click #publishCommentButton':function(evt, tmpl){
+	'click #edit-comment-form':function(evt, tmpl){
 		
 		var commentText = tmpl.find('#editedComment').value;
 		var _id = tmpl.data._id;
