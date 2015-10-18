@@ -229,7 +229,7 @@ Template.law.events({
 		Session.set('editLawFailMessage', null);
 	    var errorMessage = '';
 
-
+	    var lawId = this._id;
 	    var lawContent = tmpl.find('#lawContentEdit').value;
 	    var userName = getUserName(Meteor.user());
 	    var dateClose = tmpl.find('#dateCloseEdit').value;
@@ -250,7 +250,9 @@ Template.law.events({
 	      return false;
 	    }
 
-	    var options = { lawContent: lawContent,
+	    var options = { 
+	    				lawId: lawId,
+	    				lawContent: lawContent,
 	                    createdBy: userName,
 	                    dateClose: dateClose};
 	      

@@ -37,7 +37,7 @@ Template.comments.hasFailMessage = function(){
 
 Template.comments.events({
 
-	'click #publish-comment-form':function(evt, tmpl){
+	'click #submitCommentLaw':function(evt, tmpl){
 		Session.set('displayFailCommentMessage', null);
 		var errorMessage = '';
 
@@ -75,15 +75,28 @@ Template.comment.events({
 		
 	},
 
-	'click #edit-comment-form':function(evt, tmpl){
-		
+	'click #publishCommentButton':function(evt, tmpl){
+		Session.set('displayFailCommentMessage', null);
+		var errorMessage = '';
+
 		var commentText = tmpl.find('#editedComment').value;
 		var _id = tmpl.data._id;
+
+		if(!validNotEmptyField(commentText)) errorMessage = errorMessage + '<br />El campo para los comentarios es requerido';		
+
+		if(errorMessage.length > 0){
+	    	Session.set('displayFailCommentMessage', errorMessage);
+	    	return false;
+	    }
+
 		var options = {commentText:commentText,
 						_id:_id};
 		
 		Meteor.call('editComment', options);
 		Session.set('currentComentaryToEdit', undefined);		
+		Session.set('displayFailCommentMessage', null);
+
+		return 0;
 	}
 
 })
