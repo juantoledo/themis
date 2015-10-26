@@ -18,6 +18,9 @@
 	    			<!--<button id="initiateEditName">Editar</button> -->
 	    		{{/if}}
 	    		<br/>
+				<a id="sessionClosed" class="logout" href="#">Cerrar Sesión</a>
+
+
 	    		{{#if isInRole 'admin-user'}}
     				<button id="generateLawClosedNotifications">Generar notificaciones para leyes cerradas</button>
   				{{/if}}
@@ -27,10 +30,12 @@
 
 	       		<br />
 
+
+
 		     </div>
 		{{/with}}
 		   
 	</div>
-		
+			
 		
 </template>

@@ -71,24 +71,23 @@
 					</li>
 					
 					<li>
-						<a href="myPerfil" class="btn btn-default">{{userName}}</a>
+						<a href="myPerfil" class="">{{userName}}</a>
 					</li>
 					{{#if isLogged}}
-						<li>
-							<div id="sessionClosed">Cerrar Sesión</div>
-						</li>
+						
 					{{else}}
 						<li>
 							<a href="login">Ingresar</a>
 						</li>
+						<li>
+							<a href="registry">Registrar</a>
+						</li>
 					{{/if}}
 
-					<li>
-						<a href="registry">Registrar</a>
-					</li>
+					
 					{{#if isInRole 'councilor-user,admin-user'}}
 						<li>
-							<div id="userNotifications">Notificaciones {{pendentNotifications.length}} </div>
+							<a id="userNotifications" href="#" class="notificaciones">{{pendentNotifications.length}}</a>
 						</li>
 					{{/if}}
 				</ul>

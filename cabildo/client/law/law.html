@@ -22,77 +22,77 @@
 		
 		<div class="row law-box">
 			<div class="col-md-8">
+				<div class="law-content">
+					Estado: {{lawState}}
+					    <br />	 
 
-				Estado: {{lawState}}
-				    <br />	 
+					{{#if isCongressLaw}}
+						Tipo de Ley: {{congressLawTypeName}}
+						<br />
+						{{#if isModeEditLaw}}
+							Link oficial: <input type="text" id="linkEdit" value="{{link}}" /> <small>buscar documentación de ley <a href="https://www.camara.cl/pley/pley_buscador.aspx " target="_blank">buscar aquí</a></small>
+							<br />
+							Legislatura:  <input type="text" id="lawLegislatureEdit" value="{{legislature}}"/> 
+							<br />
+							Fecha de Ingreso: <input type="text" id="lawDateAdmisionEdit" value="{{dateAdmision}}"/>
+						    <br />	 
+							Número de boletín: <input type="text" id="lawBulletinNumberEdit" value="{{bulletin}}"/>
+						    <br />	 
+						    Materia: <input type="text" id="lawMatterEdit" value="{{matter}}"/>
+						    <br />	 
+						    Iniciativa: <input type="text" id="lawInitiativeEdit" value="{{initiative}}"/>
+						    <br />	 
+							Cámara de origen: <input type="text" id="lawChamberOriginEdit" value="{{chamberOrigin}}" />
+						    <br />	
+						{{else}}
 
-				{{#if isCongressLaw}}
-					Tipo de Ley: {{congressLawTypeName}}
-					<br />
-					{{#if isModeEditLaw}}
-						Link oficial: <input type="text" id="linkEdit" value="{{link}}" /> <small>buscar documentación de ley <a href="https://www.camara.cl/pley/pley_buscador.aspx " target="_blank">buscar aquí</a></small>
-						<br />
-						Legislatura:  <input type="text" id="lawLegislatureEdit" value="{{legislature}}"/> 
-						<br />
-						Fecha de Ingreso: <input type="text" id="lawDateAdmisionEdit" value="{{dateAdmision}}"/>
-					    <br />	 
-						Número de boletín: <input type="text" id="lawBulletinNumberEdit" value="{{bulletin}}"/>
-					    <br />	 
-					    Materia: <input type="text" id="lawMatterEdit" value="{{matter}}"/>
-					    <br />	 
-					    Iniciativa: <input type="text" id="lawInitiativeEdit" value="{{initiative}}"/>
-					    <br />	 
-						Cámara de origen: <input type="text" id="lawChamberOriginEdit" value="{{chamberOrigin}}" />
-					    <br />	
+							Link oficial: <a href="{{link}}" target="_blank">ver aquí</a>
+							<br />
+							Legislatura: {{legislature}}
+						    <br />	 
+						    Fecha de Ingreso: {{dateAdmision}}
+						    <br />	 			
+							Número de boletín: {{bulletin}}
+						    <br />	 
+						    Materia: {{matter}}
+						    <br />	 
+						    Iniciativa: {{initiative}}
+						    <br />	 
+							Cámara de origen: {{chamberOrigin}}
+						    <br />	
+
+						{{/if}}
+						
 					{{else}}
-
-						Link oficial: <a href="{{link}}" target="_blank">ver aquí</a>
-						<br />
-						Legislatura: {{legislature}}
-					    <br />	 
-					    Fecha de Ingreso: {{dateAdmision}}
-					    <br />	 			
-						Número de boletín: {{bulletin}}
-					    <br />	 
-					    Materia: {{matter}}
-					    <br />	 
-					    Iniciativa: {{initiative}}
-					    <br />	 
-						Cámara de origen: {{chamberOrigin}}
-					    <br />	
-
+						{{#if isModeEditLaw}}
+							Fecha término votación<br />
+							<input type="text" name="dateCloseEdit" id="dateCloseEdit" min="{{currentDate}}" value="{{dateClose}}"/> <small>(dd/mm/aaaa) En esta fecha se cerrará la votación y todos los usuarios que han votado serán notificados con el resultado final. No puede seleccionar una fecha anterior a la actual </small>
+						{{else}}
+							Fecha término votación: {{dateClose}}  <small>(dd/mm/aaaa)</small>
+							<br />	
+						{{/if}}
 					{{/if}}
 					
-				{{else}}
+					<br />
 					{{#if isModeEditLaw}}
-						Fecha término votación<br />
-						<input type="text" name="dateCloseEdit" id="dateCloseEdit" min="{{currentDate}}" value="{{dateClose}}"/> <small>(dd/mm/aaaa) En esta fecha se cerrará la votación y todos los usuarios que han votado serán notificados con el resultado final. No puede seleccionar una fecha anterior a la actual </small>
+						Contenido Ley: 
+						<textarea rows="4" cols="" name="lawContent" id="lawContentEdit" value="{{lawContent}}" style="width: 100%; height: auto;" class="input-xxlarg lawContent" ></textarea>
+						{{#if isCongressLaw}}
+							<button id="publishCongressLawButton">Publicar edición de ley</button>
+						{{else}}
+							<button id="publishUserLawButton">Publicar edición de ley</button>
+						{{/if}}
+						<button id="cancelEditionLawButton">Cancelar edición ley</button>
 					{{else}}
-						Fecha término votación: {{dateClose}}  <small>(dd/mm/aaaa)</small>
-						<br />	
+						Contenido Ley: 
+						<textarea rows="4" cols="" name="lawContent" id="lawContent" value="{{lawContent}}" style="width: 100%; height: auto;" class="input-xxlarg lawContent" readonly="true"></textarea>
+						{{#if hasEditLawPermissions}}
+							<button id="editLawButton">Editar ley</button>
+						{{/if}}
 					{{/if}}
-				{{/if}}
-				
-				<br />
-				{{#if isModeEditLaw}}
-					Contenido Ley: 
-					<textarea rows="4" cols="100" name="lawContent" id="lawContentEdit" value="{{lawContent}}" style="width: auto; height: auto;" class="input-xxlarg lawContent" ></textarea>
-					{{#if isCongressLaw}}
-						<button id="publishCongressLawButton">Publicar edición de ley</button>
-					{{else}}
-						<button id="publishUserLawButton">Publicar edición de ley</button>
-					{{/if}}
-					<button id="cancelEditionLawButton">Cancelar edición ley</button>
-				{{else}}
-					Contenido Ley: 
-					<textarea rows="4" cols="100" name="lawContent" id="lawContent" value="{{lawContent}}" style="width: auto; height: auto;" class="input-xxlarg lawContent" readonly="true"></textarea>
-					{{#if hasEditLawPermissions}}
-						<button id="editLawButton">Editar ley</button>
-					{{/if}}
-				{{/if}}
-				
-                {{createLawIdSession}}
-				
+					
+	                {{createLawIdSession}}
+				</div>
 				<div class="law-share">	
 					<p>
 						<div class="fb-share-button" 
